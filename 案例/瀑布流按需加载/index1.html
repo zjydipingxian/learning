@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="Anthor" content="" />
+    <title></title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: "Microsoft yahei", serif;
+    }
+
+    li {
+        list-style-type: none;
+    }
+
+    #box {
+        position: relative;
+        overflow: hidden;
+        width: 1010px;
+        margin: 10px auto;
+    }
+
+    #box .rol {
+        float: left;
+        width: 230px;
+        margin: 10px;
+    }
+
+    #box .rol li {
+        position: relative;
+        width: 100%;
+        margin: 10px 0;
+        font-size: 14px;
+        background: #f7e9ee;
+    }
+
+    #box .rol li p {
+        text-indent: 10px;
+        font-weight: bolder;
+        margin: 3px;
+    }
+
+    #box .rol li p a {
+        color: #333333;
+    }
+
+    #box .rol li p a:hover {
+        color: #ff4398;
+    }
+
+    #box .rol li p span {
+        font-weight: normal;
+        font-style: italic;
+    }
+
+    #box .rol li p span.high {
+        color: red;
+    }
+
+    #box .rol li p span.middle {
+        color: #007598;
+    }
+
+    #box .rol li p span.low {
+        color: #3cab2c;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul class="rol1 rol">
+            <!--
+                <li>
+                    <div class="img">
+                        <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p480747492.jpg" width="230" height="auto" />
+                    </div>
+                    <p>片名：<a href="">《<span>肖申克的救赎</span>》</a></p>
+                    <p>年份：<span>1994</span></p>
+                    <p>评分：<span class="high">9.5</span></p>
+                </li>
+                -->
+        </ul>
+        <ul class="rol2 rol">
+        </ul>
+        <ul class="rol3 rol">
+        </ul>
+        <ul class="rol4 rol">
+        </ul>
+    </div>
+    <div id="test"></div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script type="text/javascript">
+var $oul = $('#box ul.rol'),
+    $oTest = $('#test'),
+    s = 0,
+    c = 10,
+    timer;
+
+
+eFn(100);
+$(window).scroll(function() {
+    eFn(1000);
+})
+
+function eFn(x) {
+    if (s >= 100) return;
+    clearTimeout(timer);
+    timer = setTimeout(function() {
+
+        var testToTop = $oTest.scrollTop();
+        var nowBottom = (document.documentElement.offsetTop || document.body.offsetTop) + $(window).height();
+
+        console.log(testToTop, nowBottom);
+
+        if (testToTop - nowBottom <= 50) {
+            $.ajax({
+                    url: 'http://120.77.174.93/dbmovie',
+                    data: {
+                        start: s,
+                        count: c
+                    },
+                    dataType: 'json'
+
+                })
+                .done(function(data) {
+                    draw(data);
+                });
+            s += c;
+        }
+    }, x);
+}
+
+//渲染页面，这个过程和ajax无关，ajax只负责拿到数据，前端页面的实现与它无关的
+
+function draw(data) {
+    var i = 0;
+    ! function m(argument) {
+        if (i >= c) return; //当完成之后，结束
+        var d = data[i],
+            rating = d.rating.average, //qingfen
+            cName;
+        if (rating >= 8) {
+            cName = "high";
+        } else if (rating >= 5) {
+            cName = "middle";
+        } else {
+            cName = "low";
+        }
+        var oImg = new Image();
+        oImg.src = `${ d.images.large }`;
+        oImg.onload = function() {
+            var oLi = document.createElement("li");
+            oLi.innerHTML = `
+                            <div class="img">
+                                <img src="${ d.images.large }" width="230" height="auto" />
+                            </div>
+                            <p>片名：<a href="${d.alt}" target="_blank">《<span>${d.title}</span>》</a></p>
+                            <p>年份：<span>${d.year}</span></p>
+                            <p>评分：<span class="${cName}">${rating}</span></p>
+                        `;
+            $oul.eq(indexOfShort()).append(oLi);
+            i++;
+            m();
+            var left = oLi.offsetLeft;
+            var top = oLi.offsetTop;
+
+            oLi.style.cssText = `top:-${top}px;left:-${left}px;transition:top .5s,left .5s;`;
+            setTimeout(function() {
+                oLi.style.top = "0";
+                oLi.style.left = "0";
+            }, 100);
+        }
+    }();
+}
+//选择最短的ul
+function indexOfShort() {
+    var index = 0;
+    var iHeight = $oul.eq(0).height();
+    for (var i = 1, length = $oul.length; i < length; i++) {
+        var h = $oul.eq(i).height();
+        if (h < iHeight) {
+            index = i;
+            iHeight = h;
+        }
+    }
+    return index;
+}
+</script>
+
+</html>

@@ -1,0 +1,73 @@
+@charset 'utf-8';
+footer{
+    height:100px;
+}
+
+footer > div{
+    width:660px;
+    margin:auto;
+}
+
+footer > div > ul{
+    float:left;
+}
+
+footer > div > ul li{
+    float:left;
+    line-height:60px;
+}
+
+footer > div > ul li a{
+    color:#000;
+    font-size:14px;
+    padding:0px 20px;
+    border-right:1px solid #ddd;
+}
+
+footer > div > ul li a:hover{
+    color:rgb(1,186,149);
+}
+footer > div > div{
+    float:left;
+    margin-left:30px;
+}
+footer > div > div a{
+    display:inline-block;
+    line-height:60px;
+    color:#000;
+    margin-right:10px;
+}
+
+footer > div > div a i{
+    display:inline-block;
+    width:32px;
+    height:32px;
+    background:url('../images/foot_icon.png') no-repeat;
+    vertical-align:middle;
+}
+
+footer > div > div a:nth-of-type(2) i{
+    background-position:-64px 0px;
+}
+footer > div > div a span{
+    margin-left:5px;
+    vertical-align:middle;
+}
+
+footer > div > div a:hover{
+    color:rgb(1,186,149);
+}
+
+footer > div > div a:nth-of-type(1):hover i{
+    background-position:-32px 0px;
+}
+
+footer > div > div a:nth-of-type(2):hover i{
+    background-position:-96px 0px;
+}
+
+footer p{
+    text-align:center;
+    font-size:13px;
+    color:#999;
+}

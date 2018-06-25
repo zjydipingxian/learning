@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>淡入淡出轮播</title>
+		<meta name="Keywords" content="关键词,关键词">
+		<meta name="description" content="">
+		<link rel="stylesheet" type="text/css" href="css/banner.css"/>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="box">
+				<ul class="banner">
+					<li><img src="images/1.jpg" alt="Tmall" width="" height=""/></li>
+					<li><img src="images/2.jpg" alt="Tmall" width="" height=""/></li>
+					<li><img src="images/3.jpg" alt="Tmall" width="" height=""/></li>
+					<li><img src="images/4.jpg" alt="Tmall" width="" height=""/></li>
+					<li><img src="images/5.jpg" alt="Tmall" width="" height=""/></li>
+					<li><img src="images/6.jpg" alt="Tmall" width="" height=""/></li>
+				</ul>
+				<div class="btn">
+					<ul class="btnList clearfix">
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		 var oli=document.querySelectorAll('.banner li'); //要改变的li
+		 var obtn=document.querySelectorAll('.btnList li'); //小圆点
+		 var len=oli.length //长度
+		 var prev=document.getElementById('prev');
+		 var next=document.getElementById('next');
+		 var num=0;
+		 var  timer=null;
+		 oli[num].style.visibility='inherit';
+		 obtn[num].className='on';
+		 for(var i=0;i<len;i++){ //小圆点hover事件
+		 	obtn[i].index=i;
+		 	oli[i].index=i;
+		 	obtn[i].onmouseover=function(){
+		 		obtn[num].className='';
+		 		//动画的定义
+		 		animation(oli[num],'opacity',0,500,function(){
+		 			this.style.visibility='hidden';
+		 		});
+		 		
+		 		num=this.index;
+		 		paly(num); //调用
+		 		clearInterval(timer);
+		 	}
+		 	obtn[i].onmouseout=function(){
+		 		auto();
+		 	}
+		 }
+		 auto();
+		function auto(){
+			timer=setInterval(function(){
+				obtn[num].className='';
+				//动画的定义
+				animation(oli[num],'opacity',0,500,function(){
+					this.style.visibility='hidden';
+				});
+		 		
+				num++;
+				num=num%=len;
+				paly(num); //调用
+			},3000)
+		}
+		function paly(nuy){
+			obtn[nuy].className='on';
+	 		oli[nuy].style.visibility='inherit';
+	 		animation(oli[nuy],'opacity',1,500);
+		}
+		
+		
+		
+		
+		 //兼容写法：
+        window.requestAnimationFrame = window.requestAnimationFrame || function (fn){
+            return setInterval(fn,1000/60);
+        }
+        window.cancelAnimationFrame = window.cancelAnimationFrame ||clearInterval();
+        //获取样式
+        function getStyle(obj,attr){
+            return window.getComputedStyle? getComputedStyle(obj)[attr]:obj.currentStyle[attr];
+        } 
+		//路程=速度*时间 或者  时间*时间比例
+        function animation(obj,attr,target,time_v,callback){
+            var init =  parseFloat(getStyle(obj,attr));
+            var Nowtime = new Date();//开始时间
+           (function run(){
+                var NewTime = new Date()- Nowtime;
+                var  prop = NewTime/time_v; 
+                var time = window.requestAnimationFrame(run);
+                if(prop>=1){
+                    prop = 1;
+                    window.cancelAnimationFrame(time);
+                }
+                var val = (target-init)*prop;
+                if(attr == 'opacity'){
+                     obj.style[attr] = init+val;
+                     obj.style.filter = 'alpha(opacity='+(init+val)*100+')';
+                }else{
+                     obj.style[attr] = init+val+'px';
+                }
+                if(prop == 1)callback && callback.call( obj );//回调函数
+           })();
+        }
+	</script>
+</html>

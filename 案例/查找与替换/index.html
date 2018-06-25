@@ -1,0 +1,71 @@
+
+<head>
+    <meta charset="UTF-8">
+    <title>查找与替换</title>
+    <link rel="stylesheet" type="text/css" href="css/text.css">
+    <style type="text/css">
+    .ng-hide {
+        appearance: button;
+        -moz-appearance: button;
+        /* Firefox */
+        -webkit-appearance: button;
+        /* Safari 和 Chrome */
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        /* Firefox */
+        -webkit-box-sizing: border-box;
+        /* Safari */
+        padding: 0;
+        width: 100px;
+        height: 50px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <input type="text" placeholder="匹配" style="height: 100px;">
+        <input type="text" placeholder="替换">
+        <button type="" id="FindThe">查找</button>
+        <button type="" id='replace'>替换</button>
+        <p>欢迎来到绝地求生之老阴B大乱斗 本游戏最大的特点是： 号称可以一枪打死三级防的玄学武器喷子两枪打在平底锅上一滴血没扣 一个号称一直在努力做优化的游戏每次更新都修复了玩家玩游戏过于流畅的bug
+        </p>
+    </div>
+    <script type="text/javascript">
+    var oIput = document.getElementsByTagName("input"),
+        oP = document.getElementsByTagName('p')[0],
+        oBtn = document.getElementsByTagName('button'),
+        pText = oP.innerHTML;
+
+
+
+    //查找
+    oBtn[0].onclick = function() {
+        var val = oIput[0].value.trim();
+        if (val) {
+            oP.innerHTML = pText.split(val).join("<span>" + val + "</span>")
+        }
+        var aa = oP.innerHTML;
+        if (aa.indexOf(val) <= -1) {
+            alert('不存再改字符，麻烦请在收搜一次');
+
+            // alert(message?: DOMString)
+        }
+    }
+
+    // 替换
+
+    oBtn[1].onclick = function() {
+        var val1 = oIput[0].value.trim(),
+            val2 = oIput[1].value.trim();
+        if (val1) {
+            var arr = pText.split(val1);
+            oP.innerHTML = arr.join("<span>" + val2 + "</span>");
+            pText = arr.join(val2);
+            console.log(arr.join(val2))
+        }
+    }
+    </script>
+</body>
+
+</html>

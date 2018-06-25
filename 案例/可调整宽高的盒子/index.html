@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>可调整宽高盒子</title>
+	<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+	<div id="Lbox">
+		<div id="conter">
+			<!-- <p class="T"></p>
+			<p class="R"></p>
+			<p class="B"></p>
+			<p class="L"></p>
+			<p class="LT"></p>
+			<p class="RT"></p>
+			<p class="LB"></p>
+			<p class="RB"></p> -->
+		</div>
+	</div>
+	<div id="Rbox"></div>
+
+	<script type="text/javascript">
+		var Lbox = document.getElementById('Lbox'),   // 左盒子
+			conter = document.getElementById('conter'),
+			Rbox = document.getElementById('Rbox');
+
+		//给右边的盒子赋值
+		Rbox.style.width = conter.clientWidth + 'px';
+		Rbox.style.height = conter.clientHeight + 'px';
+
+		changeBoxSize(conter);
+		conter.onmousedown = function (e) {
+			e = e || window.event;
+			var Downx = e.clientX,
+				Downy = e.clientY,
+				oLeft = conter.offsetLeft,
+				oTop = conter.offsetTop;
+				console.log(Downx,Downy,oLeft,oTop)
+
+			//盒子运动	
+			function Boxmove(e) {
+				e = e || window.event;
+				var Movex = e.clientX,
+					Movey = e.clientY,
+					moveL = Movex - Downx + oLeft,
+					moveT = Movey - Downy + oTop;
+				moveL = Math.max(0 , moveL);
+				moveT = Math.max(0 , moveT);
+
+				moveL = Math.min(Lbox.clientWidth - conter.clientWidth , moveL);
+				moveT = Math.min(Lbox.clientHeight - conter.clientHeight , moveT);
+
+
+				conter.style.left = moveL + 'px';
+    			conter.style.top = moveT + 'px';
+    			Rbox.style.backgroundPosition = -moveL + 'px '+ -moveT + 'px';
+			}
+			document.addEventListener('mousemove', Boxmove);
+			document.addEventListener('mouseup', function(){
+	    		document.removeEventListener('mousemove', Boxmove);
+	    	});
+		}
+
+		function ctElement(obj,str,arr) {
+			var aBox = document.createElement('p');//创建元素
+				aBox.classList.add(str);
+	    		obj.appendChild(aBox);//把创建的元素放到盒子里
+
+	    	aBox.onmousedown = function (e) {
+	    		e = e || window.event;
+	    		e.stopPropagation();//阻止冒泡，否则影响到父级盒子的拖拽事件
+	    		var oL = obj.offsetLeft,
+    				oT = obj.offsetTop,
+    				oX = e.clientX;
+    				oY = e.clientY;
+    				oW = parseFloat(getComputedStyle(obj).width),
+    				oH = parseFloat(getComputedStyle(obj).height);
+    			function changeSize(e) {  //改变盒子大小
+    				e = e || window.event;
+    				var nX = e.clientX,
+    					nY = e.clientY,
+    					dX = nX - oX,//鼠标移动的x差值
+    					dY = nY - oY,//鼠标移动的y差值
+    					nT = oT + dY * arr[0],
+    					nL = oL + dX * arr[1],
+    					nW = oW - dX * arr[2],
+    					nH = oH - dY * arr[3];
+	    				nT = Math.max(0 , nT);//限制top值最小0
+	    				nT = Math.min(nT,oT + oH-60);//限制top最大值
+	    				nL = Math.max(0, nL);//限制left值最小0
+	    				nL = Math.min(nL, oL + oW - 60);//限制left最大值
+	    				nW = Math.max(60 , nW);//限制最小宽度为60
+
+	    				if(nL === oL){
+	    					if(nL === 0 && dX<0 && oX-Lbox.offsetLeft<=4)//判断小盒子是不是靠边并且拖拽的是靠边的点并且是往大盒子外面拖拽
+	    						nW = oW;
+	    					else
+	    						nW = Math.min(Lbox.clientWidth-obj.offsetLeft-2,nW);
+	    				}else{
+	    					nW = Math.min(nW,oL+oW);
+	    				}
+	    				nH = Math.max(60,nH);//限制最小高度为60
+	    				if(nT === oT){
+	    					if(oT === 0 && dY<0 && oY-Lbox.offsetTop<=4)
+	    						nH = oH;
+	    					else
+	    						nH = Math.min(Lbox.clientHeight-obj.offsetTop-2,nH);
+	    				}else{
+	    					nH = Math.min(nH,oT+oH);
+	    				}
+	    				obj.style.top = nT + 'px';
+	    				obj.style.left = nL + 'px';
+	    				obj.style.width = nW +'px';
+	    				obj.style.height = nH +'px';
+	    				//改变盒子的宽高left,top的同时要改变右边盒子的背景位置和宽高
+	    				Rbox.style.width = nW +'px';
+	    				Rbox.style.height = nH +'px';
+	    				Rbox.style.backgroundPosition = -nL + 'px '+ -nT + 'px';
+    			}
+    			document.addEventListener('mousemove',changeSize);
+	    		document.addEventListener('mouseup',function(){
+	    				document.removeEventListener('mousemove',changeSize);
+	    		});	
+	    	}	
+		}
+
+		function changeBoxSize(obj){
+    		var arr = [{//创建数组存放的8对象对应每个点，array是每个点拖拽的时候需要改变的top,left,width,height，因为每个点的拖拽事件对应的改变不一样，所以用这个方法封装起来，就不用再changesize里面做判断是拖拽的哪个点了
+    			t : 'T',
+    			array:[1,0,0,1]
+    			},
+	    		{
+					t : 'B',
+	    			array:[0,0,0,-1]
+	    		},
+	    		{
+    			t : 'L',
+    			array:[0,1,1,0]
+    			},
+    			{
+	    			t : 'R',
+	    			array:[0,0,-1,0]
+	    		},
+	    		{
+	    			t : 'LT',
+	    			array:[1,1,1,1]
+	    		},
+	    		{
+    			t : 'RT',
+    			array:[1,0,-1,1]
+	    		},
+	    		{
+	    			t : 'LB',
+	    			array:[0,1,1,-1]
+	    		},
+	    		{
+	    			t : 'RB',
+	    			array:[0,0,-1,-1]
+    			}];
+    		for(var i = 0;i < arr.length;i++){
+	    		ctElement(obj ,arr[i].t,arr[i].array);
+	    	}
+	    }
+	</script>
+</body>
+</html>

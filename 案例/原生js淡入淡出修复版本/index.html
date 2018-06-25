@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>淡入淡出轮播</title>
+		<meta name="Keywords" content="关键词,关键词">
+		<meta name="description" content="">
+		<link rel="stylesheet" type="text/css" href="css/banner.css"/>
+		<script type="text/javascript" src="images/move.js" ></script>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="box">
+				<ul class="banner">
+					<li style="display: block;"><img src="images/1.jpg" alt="Tmall" width="" height=""/></li>
+					<li><img src="images/2.jpg" alt="Tmall" width="" height=""/></li>
+					<li><img src="images/3.jpg" alt="Tmall" width="" height=""/></li>
+					<li><img src="images/4.jpg" alt="Tmall" width="" height=""/></li>
+					<li><img src="images/5.jpg" alt="Tmall" width="" height=""/></li>
+					<li><img src="images/6.jpg" alt="Tmall" width="" height=""/></li>
+				</ul>
+				<div class="btn">
+					<ul class="btnList clearfix">
+						<li class="on"></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+				<div class="tab prev"></div>
+		  	    <div class="tab next"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		(function(){
+			var wrap=document.getElementById('wrap'),
+			oli=wrap.querySelectorAll('ul.banner li'),
+			obtn=wrap.querySelectorAll('ul.btnList li'),
+			prev=document.getElementsByClassName('prev')[0],
+			next=document.getElementsByClassName('next')[0],
+			index=0,timer=null,AuTime=null,len=oli.length;
+			
+			for(var i=0;i<len;i++){
+				obtn[i].i=i;
+				obtn[i].onmouseenter=function(){
+					if(index===this.i){
+						return;
+					}
+					clearTimeout(timer);
+                    var num = this.i;
+                    timer = setTimeout(function () {   //加这个可以阻止快速划过小圆点的时候不会出现奇怪的状态,
+                    paly(function () {
+                        index = num;
+                    });
+                    },200);
+				}
+			}
+			//下一张
+			next.onclick=function(){
+				paly(function () {
+					stop_t = new Date();
+					index++;
+                	index%=len;
+                });
+			}
+			prev.onclick=function(){
+				paly(function (){
+              	 index--;
+              	 index=index<=0?len-1:index;
+                });
+			}
+			auto();
+                function auto() {
+                    AuTime = setInterval(function (){
+	                    paly(function () {
+	                    index ++;
+	                    index %= len;
+	                    });
+                    },1500);
+            }
+			function paly(cha){
+				oli[index].stop && cancelAnimationFrame(oli[index].stop.timer);
+				oli[index].stop=move(oli[index],{opacity : 0},500);
+                obtn[index].className='';
+				cha();
+				obtn[index].className='on';
+				oli[index].style.opacity = 0;
+                oli[index].style.filter = "alpha(opacity=0)";
+                oli[index].style.display = "block";
+                oli[index].stop && cancelAnimationFrame( oli[index].stop.timer );
+                oli[index].stop=move(oli[index],{opacity : 1},500);
+			}
+			wrap.onmouseenter = function () {clearInterval(AuTime);};
+    		wrap.onmouseleave = function () {auto();};
+		})();
+		
+	</script>
+</html>

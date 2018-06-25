@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>多重选项卡</title>
+    <link rel="stylesheet" type="text/css" href="css/banner.css">
+</head>
+
+<body>
+    <div id="box">
+        <div id="tab">
+            <ul>
+                <li class="on">汽车</li>
+                <li>美食</li>
+                <li>豪车</li>
+                <li>美女</li>
+            </ul>
+        </div>
+        <div id="content">
+            <div class="pic on">
+                <ul>
+                    <li class="on" style="background: url(images/c1.jpg);"></li>
+                    <li style="background: url(images/c2.jpg);"></li>
+                    <li style="background: url(images/c3.jpg);"></li>
+                    <li style="background: url(images/c4.jpg);"></li>
+                </ul>
+            </div>
+            <div class="btn on">
+                <ul>
+                    <li class="on">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                </ul>
+            </div>
+            <div class="pic">
+                <ul>
+                    <li class="on" style="background: url(images/m1.jpg);"></li>
+                    <li style="background: url(images/m2.jpg);"></li>
+                    <li style="background: url(images/m3.jpg);"></li>
+                    <li style="background: url(images/m4.jpg);"></li>
+                    <li style="background: url(images/m5.jpg);"></li>
+                </ul>
+            </div>
+            <div class="btn">
+                <ul>
+                    <li class="on">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </ul>
+            </div>
+            <div class="pic">
+                <ul>
+                    <li class="on" style="background: url(images/c1.jpg);"></li>
+                    <li style="background: url(images/c2.jpg);"></li>
+                    <li style="background: url(images/c3.jpg);"></li>
+                    <li style="background: url(images/c4.jpg);"></li>
+                </ul>
+            </div>
+            <div class="btn">
+                <ul>
+                    <li class="on">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                </ul>
+            </div>
+            <div class="pic">
+                <ul>
+                    <li class="on" style="background: url(images/s1.jpg);"></li>
+                    <li style="background: url(images/s2.jpg);"></li>
+                    <li style="background: url(images/s3.jpg);"></li>
+                    <li style="background: url(images/s4.jpg);"></li>
+                    <li style="background: url(images/s5.jpg);"></li>
+                </ul>
+            </div>
+            <div class="btn">
+                <ul>
+                    <li class="on">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+	<script type="text/javascript">
+		var tabLi = document.querySelectorAll("#tab li"),   //type选项
+            pic = document.getElementsByClassName("pic"),	//图片
+            btn = document.getElementsByClassName("btn"),	//按钮
+            index = 0;
+
+
+        
+
+            //选项轮播
+            for (var i = 0; i < tabLi.length; i++) {
+             	var picLi = pic[i].querySelectorAll("li"),
+            		btnLi = btn[i].querySelectorAll("li");
+
+            	// tabLi[i].index = i 
+            	(function (i) {
+            		tabLi[i].onmouseenter = function () {
+            			tabLi[index].className = '';
+            			pic[index].className = "pic";
+                    	btn[index].className = "btn";
+            			index = i;
+            			tabLi[index].className = 'on';
+            			pic[index].className = "pic on";
+                    	btn[index].className = "btn on";
+            		}
+            	})(i);
+
+            	(function (picLi,btnLi) {
+            		for (var i = 0; i < btnLi.length; i++) {
+            			var index = 0;
+            			(function (i) {
+            				btnLi[i].onmouseenter = function () {
+            					picLi[index].className = '';
+            					btnLi[index].className = '';
+            					index = i;
+            					picLi[i].className = 'on';
+            					btnLi[i].className = 'on';
+            				}
+            			})(i);
+            		}
+            	})(picLi,btnLi);
+             }
+
+	</script>
+</html>

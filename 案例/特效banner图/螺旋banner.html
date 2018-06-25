@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>螺旋banner</title>
+	<link rel="stylesheet" href="">
+	<style type="text/css">
+		*{margin: 0;padding: 0;list-style: none;text-decoration: none;font: 12/1.5 "微软雅黑"};
+  		.clearfix:after{content:'';display:block;clear:both;}
+  		#wrap{width: 590px;height: 470px;margin: 50px auto;position: relative;}
+  		.banner{width: 100%;height: 100%;}
+  		.banner li {position: absolute;top: 0;left: 0;display: none;}
+  		.banner li.on{display: block}
+  		.banner li img{display: block;}
+  		#mark{ position: absolute;width:100%; height:100%;top: 0}
+  		#mark li {float:left;}
+  		#tab{position: absolute;left: 46px;bottom: 20px;}
+  		#tab span{display: inline-block;width: 10px;height: 10px;border-radius: 50%;border: 2px solid #b9beba;cursor: pointer;margin: 0 5px;}
+  		#tab span.on{background: #fff;}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<ul class="banner clearfix">
+			<li class="on"><img src="images/1.jpg" alt=""/></li>
+			<li><img src="images/2.jpg" alt="" /></li>
+			<li><img src="images/3.jpg" alt="" /></li>
+			<li><img src="images/4.jpg" alt="" /></li>
+			<li><img src="images/5.jpg" alt="" /></li>
+		</ul>
+		<ul id="mark"></ul>
+		<div id="tab">
+			<span class="on"></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		var $banner_aLi = $('ul.banner li'),
+            $banner_aImg = $('ul.banner li img'),
+            $tab = $('#tab span'),
+            $mark = $('#mark').eq(0),
+            w_num = 8,//$mark里面水平方向li的个数
+           	h_num = 8,//$mark里面垂直方向li的个数
+           	w = $mark.width() / w_num,//一个li的宽
+            h = $mark.height()/ h_num,//一个li的宽
+            index = 0,
+            src,timer,arr = [];
+
+        $tab.click(function (argument) {
+        	$tab.eq(index).removeClass('on');//按钮
+            $banner_aLi.eq(index).removeClass('on');
+            src = $banner_aImg.eq(index).attr('src');
+            createLi();
+            index = $(this).index();//更新index
+            $tab.eq(index).addClass('on');//有img的li
+            $banner_aLi.eq(index).addClass('on');
+
+        })
+
+        function createLi() {
+        	$mark.empty();//清空$mark内容
+            clearInterval(timer);
+           	for (var i = 0; i < w_num; i++) {
+           		for (var j = 0; j < h_num; j++) {
+           			var $oLi = $('<li></li>');
+           				$oLi.css({
+           					width: w,
+           					height: h,
+           					transition:'0.5s ease-in',
+           					backgroundImage:'url('+src+')',
+           					backgroundPosition:'-'+( i * w ) +'px -'+ ( j * h ) +'px'
+           				});
+           	
+
+           			$mark.append($oLi);//写入页面
+           			$oLi.css({//一定得写入页面后添加left，top
+                    left : $oLi.position().left,
+                    top : $oLi.position().top
+                })
+                arr.push($oLi);//放入arr数组	
+           		}
+           	}
+
+           	$mark.children().each(function(index,item){
+                $(item).css({position:'absolute'});
+                // console.log(item)
+            })
+            var num = 0;
+                var x = 0;
+                var y = 0;
+                var min = 0;
+                var x_max = w_num-1;
+                var y_max = h_num-1;
+
+                clearInterval(timer);
+
+                timer = setInterval(function(){
+                   $mark.children().eq(y * w_num + x).css({
+                        transform:'scale(0.5)'
+                   }).fadeOut();
+
+
+                     if(y === min && x< x_max ){//上
+                        x ++;
+                     }else if(x === x_max && y < y_max){//右
+                        y++;
+                     }else if( y === y_max && x > min){//下
+                        x--;
+                     }else{//左
+                        y--;
+                     }
+
+                     if( (y-1)=== min && x === min ){//确定拐点
+                        min++;
+                        x_max--;
+                        y_max--;
+                     }
+
+
+                    num++;
+
+                    if(num == w_num * h_num){
+                        clearInterval(timer);
+
+                    }
+
+
+                },1000/60)
+
+        }    
+	</script>
+</body>
+</html>

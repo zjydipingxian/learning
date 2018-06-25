@@ -1,0 +1,59 @@
+*{
+	margin:0;
+	padding: 0;
+	list-style: none;
+	text-decoration:none;
+	font: 12px/"微软雅黑";
+}
+.box{
+	width:1100px;
+	margin: 10px auto;
+	padding:20px;
+	box-shadow: 0 0 10px #222;
+	border-radius:6px;
+}
+.box .conter .mer-list{
+	overflow:hidden;	
+}
+.box .conter .mer-list li{
+	float: left;
+	width: 235px;
+	margin: 10px 10px;
+	padding:10px;
+	box-shadow: 0 0 5px 0px #ddd;
+	cursor: pointer;
+}
+.box .conter .mer-list li p{
+	float: left;
+	text-indent:.5em;
+	margin-right: 10px;
+}
+.box .conter .mer-list li div{
+	color:orangered;
+}
+.box .conter .mer-list li img{
+	width: 235px;
+	height: 220px;
+}
+.box .conter .jiage{
+	padding: 10px;
+	overflow: hidden;
+	text-align: center;
+}
+.box .conter .jiage p{
+	float: left;
+	margin-left: 20px;
+	width: 100px;
+	line-height: 35px;
+	text-align: center;
+	border: 1px solid red;
+	border-radius: 10px;
+	cursor: pointer;
+}
+/*.box .conter .jiage p:hover{
+	background: #368;
+}
+*/
+.box .conter .jiage p.on{
+	background: red;
+}

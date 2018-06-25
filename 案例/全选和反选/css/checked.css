@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font: 12/1.5 '微软雅黑';
+}
+
+#box {
+    width: 450px;
+    margin: 50px auto;
+}
+
+h2 {
+    line-height: 40px;
+    font-size: 15px;
+    font-weight: 400px;
+    background: #6495ED;
+    color: #fff;
+    text-indent: 1em;
+}
+#item li {
+	padding-left: 12px;
+    line-height: 35px;
+    margin-bottom: 2px;
+    color: #666;
+    cursor: pointer;
+}
+#item li.li1{
+	background: #FFFACD;
+}
+#item li.li2{
+	background: #FFEFD5;
+}
+
+.chooseType{
+	overflow: hidden;
+	padding-left: 12px;
+    line-height: 35px;
+    margin-bottom: 2px;
+    color: #222;
+    cursor: pointer;
+    background: #6495ED;
+}
+#choose{
+	float: left;
+	margin-right: 15px;
+}
+#choose i{
+    font-style: normal;
+}
+#Uncheck{
+	float: left;
+}
+i.ck{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
+	background: url(../images/ck.png);
+}
+i.cked{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
+	background: url(../images/cked.jpg);
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>多球运动</title>
+	<link rel="stylesheet" href="css/ball.css">
+</head>
+<body>
+	<script type="text/javascript">
+		//兼容动画
+		window.requestAnimationFrame = window.requestAnimationFrame || function(fn){return setTimeout(fn,1000/60)};
+		//兼容清除
+		window.cancelAnimationFrame = window.cancelAnimationFrame || clearTimeout;
+
+
+
+		var maxW = document.documentElement.clientWidth,
+			maxH = document.documentElement.clientHeight;
+
+		
+		window.onresize = function(){
+			maxW = document.documentElement.clientWidth;
+			maxH = document.documentElement.clientHeight;
+		}	
+
+		//定义数组存储所有的小球  
+        var balls = []; 
+        //生成小球函数
+        createBalls(5);
+        function createBalls(num) {
+        	for (var i = 0; i < num; i++) {
+        		var ball = document.createElement('div');
+        		//随机小球起始的X坐标和小球的Y坐标  
+                ball.x = randomNum(0, 1200);  
+                ball.y = randomNum(0, 700); 
+                //随机小球的移动速度  
+                ball.speed = randomNum(2, 5); 
+                //随机小球移动的方向  
+                if (Math.random() - 0.5 > 0) {  
+                    ball.xflag = true;  
+                } else {  
+                    ball.xflag = false;  
+                }  
+                if (Math.random() - 0.5 > 0) {  
+                    ball.yflag = true;  
+                } else {  
+                    ball.yflag = false;  
+                }
+                ball.style.backgroundColor = RGBcolor();  
+                ball.innerHTML = i + 1;  
+                document.body.appendChild(ball);  //生成num个div
+                //将所有的小球存储到数组中  
+                balls.push(ball);  
+        	}
+        }
+
+
+        function run(ballObj) {
+			setInterval(function() {  
+            //判断小球的标志量，对小球作出相应操作  
+	            if (ballObj.yflag) {  
+	                //小球向下移动  
+	                ballObj.y += ballObj.speed;  
+	                if (ballObj.y >= maxH - ballObj.offsetWidth) {  
+	                    ballObj.y = maxH - ballObj.offsetWidth;  
+	                    ballObj.style.backgroundColor = RGBcolor(); 
+	                    ballObj.yflag = false;  
+	                }  
+	            } else {  
+	                //小球向上移动  
+	                ballObj.y -= ballObj.speed;  
+	                if (ballObj.y <= 0) {  
+	                    ballObj.y = 0;  
+	                    ballObj.style.backgroundColor = RGBcolor(); 
+	                    ballObj.yflag = true;  
+	                }  
+	            }  
+	            if (ballObj.xflag) {  
+	                //小球向右移动  
+	                ballObj.x += ballObj.speed;  
+	                if (ballObj.x >= maxW - ballObj.offsetHeight) {  
+	                    ballObj.x = maxW - ballObj.offsetHeight;  
+	                    ballObj.style.backgroundColor = RGBcolor(); 
+	                    ballObj.xflag = false;  
+	                }  
+	            } else {  
+	                //小球向左移动  
+	                ballObj.x -= ballObj.speed;  
+	                if (ballObj.x <= 0) {  
+	                    ballObj.x = 0;  
+	                    ballObj.style.backgroundColor = RGBcolor(); 
+	                    ballObj.xflag = true;  
+	                }  
+	            }  
+	             ballObj.style.top = ballObj.y + "px";  
+	             ballObj.style.left = ballObj.x + "px";  
+           		crash(ballObj); 
+        	}, 6);  
+				// requestAnimationFrame(run);	
+        }
+
+
+
+
+        for (var i = 0; i < balls.length; i++) {  
+            //将所有的小球传到函数中,来实现对小球的移动  
+            run(balls[i]);  
+        } 
+		function RGBcolor(){ 
+			//随机rgb值
+            var r = Math.floor(Math.random()*256),
+                g = Math.floor(Math.random()*256),
+                b = Math.floor(Math.random()*256);
+                a =	Math.floor(Math.random()*10)*0.1;
+            //return "rgba("+r+","+g+","+b+","+a+")";
+           return "rgb("+r+","+g+","+b+")";
+        }
+
+
+		//随机函数
+		function randomNum(m, n) {  
+            return Math.floor(Math.random() * (n - m + 1) + m);  
+        } 
+
+
+        var x1, y1, x2, y2;  
+        //碰撞函数  
+        function crash(ballObj) {  
+            //通过传过来的小球对象来获取小球的X坐标和Y坐标  
+            x1 = ballObj.x;  
+            y1 = ballObj.y;  
+            for (var i = 0; i < balls.length; i++) {  
+                //确保不和自己对比  
+                if (ballObj != balls[i]) {  
+                    x2 = balls[i].x;  
+                    y2 = balls[i].y;  
+                    //判断位置的平方和小球的圆心坐标的关系  
+                    if (Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2) + maxW <= Math.pow(ballObj.offsetWidth + balls[i].offsetWidth, 2)) {  
+                        //判断传过来的小球对象，相对于碰撞小球的哪个方位  
+                        if (ballObj.x < balls[i].x) {  
+                            if (ballObj.y < balls[i].y) {  
+                                //小球对象在被碰小球的左上角  
+                                ballObj.yflag = false;  
+                                ballObj.xflag = false;  
+                            } else if (ballObj.y > balls[i].y) {  
+                                //小球对象在被碰小球的左下角  
+                                ballObj.xflag = false;  
+                                ballObj.yflag = true;  
+                            } else {  
+                                //小球对象在被撞小球的正左方  
+                                ballObj.xflag = false;  
+                            }  
+                        } else if (ballObj.x > balls[i].x) {  
+                            if (ballObj.y < balls[i].y) {  
+                                //小球对象在被碰撞小球的右上方  
+                                ballObj.yflag = false;  
+                                ballObj.xflag = true;  
+                            } else if (ballObj.y > balls[i].y) {  
+                                //小球对象在被碰撞小球的右下方  
+                                ballObj.xflag = true;  
+                                ballObj.yflag = true;  
+                            } else {  
+                                //小球对象在被撞小球的正右方  
+                                ballObj.xflag = true;  
+                            }  
+                        } else if (ballObj.y > balls[i].y) {  
+                            //小球对象在被撞小球的正下方  
+                            ballObj.yflag = true;  
+                        } else if (ballObj.y < balls[i].y) {  
+                            //小球对象在被撞小球的正上方  
+                            ballObj.yflag = false;  
+                        }  
+                    }  
+                }  
+            }  
+        }   
+	</script>
+</body>
+</html>

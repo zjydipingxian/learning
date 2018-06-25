@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>系统时间</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;list-style: none;text-decoration: none;}
+		#box{
+			width: 700px;
+			height: 150px;
+			margin: 10px auto;
+			line-height: 150px;
+			text-align: center;
+			box-shadow: 0 0 10px #222;
+			color: goldenrod;
+			font-size: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+	<script type="text/javascript">
+		var box=document.getElementById('box');
+		setInterval(timer(),1000);
+		/**
+		 * [timer description]
+		 * 系统时间 
+		 */
+		function timer() {
+			var time=new Date();//获取本地时间
+			var YY=time.getFullYear(); //获取年份
+			var MM=time.getMonth()+1; //获取月份
+			var DD=time.getDate();  //获取多少号
+			var day=time.getDay(); //获取星期几
+			var HH=time.getHours(); //获取小时
+			var mm=time.getMinutes(); //获取分钟
+			var mis=time.getSeconds(); //获取秒
+			var DayArr=['天','一','二','三','四','五','六'];
+			box.innerHTML='现在本地时间为：'+YY+'年'+Two(MM)+'月'+DD+'号'+' '+'星期'+DayArr[day]+' '+fn(HH)+' '+Two(HH)+':'+Two(mm)+':'+Two(mis);	
+			return timer;
+		}
+
+
+		/**
+		 * [Two description]
+		 * @param {[type]} obj [description]
+		 *        判断大于10就是正常显示,小于0就是在前面加0;
+		 */
+		function Two(obj) {
+			if(obj>=10){
+				obj=obj;
+			}else{
+				obj='0'+obj;
+			}
+			 return obj;
+		}
+
+		function fn(obj){
+			var tmArr=['凌晨','早晨','上午','中午','下午','傍晚','晚上','深夜'];
+			for(var i=0;i<tmArr.length;i++){
+				switch(i){
+					case 0: (obj>=3&&obj<=6)&&(obj=tmArr[i]); //凌晨
+						break;
+					case 1: (obj>=6&&obj<=8)&&(obj=tmArr[i]); //早晨
+						break;
+					case 2: (obj>=8&&obj<=11)&&(obj=tmArr[i]); //上午
+						break;
+					case 3: (obj>=11&&obj<=13)&&(obj=tmArr[i]); //中午
+						break;
+					case 4: (obj>=13&&obj<=17)&&(obj=tmArr[i]); //下午
+						break;
+					case 5: (obj>=17&&obj<=19)&&(obj=tmArr[i]); //傍晚
+						break;
+					case 6: (obj>=19&&obj<=23)&&(obj=tmArr[i]); //晚上
+						break;
+					default :(23>=19&&obj<=3)&&(obj=tmArr[i]);	//深夜
+				}
+			}
+			return obj;
+		}
+	</script>
+</html>

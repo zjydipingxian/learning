@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font: 12/1.5 '微软雅黑';
+}
+body{
+	background: #222;
+}
+#box{
+	position: relative;
+	width: 500px;
+	height: 300px;
+	margin: 50px auto;
+	/*background: red;*/
+}
+
+#box .banner li{
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 500px;
+	height: 300px;
+	line-height: 300px;
+	text-align: center;
+	color: #fff;
+	font-size: 30px;
+}
+#box .banner li.on{
+	display: block;
+}
+#box .typeBanner{
+	position: absolute;
+	bottom: -60px;
+}
+
+#box .typeBanner span{
+	display: inline-block;
+	background: #368;
+	border-radius: 10px;
+	width: 90px;
+	height: 50px;
+	line-height: 50px;
+	color: #222;
+	text-align: center;
+	cursor: pointer;
+}
+#box .typeBanner span.on{
+	background: #666;
+	color: #fff;
+}
+
+#box .btn span{
+	position: absolute;
+	top: 50%;
+	margin-top: -40px;
+	color: #fff;
+	font-size: 30px;
+	width: 40px;
+	height: 80px;
+	line-height: 80px;
+	text-align: center;
+	cursor: pointer;
+	background: rgba(0,0,0,.5);
+}
+
+#box .btn span.prev{
+	left: 0;
+}
+
+#box .btn span.next{
+	right: 0;
+}
+
+#text{
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	background: red;
+	text-align: center;
+	background: rgba(225,225,225,.5);
+	color: #fff;
+}

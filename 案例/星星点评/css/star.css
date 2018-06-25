@@ -1,0 +1,42 @@
+*{
+	margin: 0;
+	padding: 0;
+	list-style:none;
+	font:12px/1.5 "微软雅黑";
+	color:#666;
+}
+body{
+	background:#222;
+}
+.box{
+	width: 680px;
+	height: 250px;
+	margin: 100px auto;
+}
+.box h2{
+	font-weight: bold;
+	color: #fff;
+	font-size: 20px;
+}
+.box ul{
+	overflow: hidden;
+}
+.box ul li{
+	float: left;
+	width: 22px;
+	height: 22px;
+	margin:15px;
+	background: url(../images/star.png) no-repeat 0 0;
+}
+.box ul li.on{
+	background: url(../images/star.png) no-repeat 0 -28px;
+}
+.box p{
+	float: right;
+	width:200px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	border: 1px solid red;
+	color: #fff;
+}

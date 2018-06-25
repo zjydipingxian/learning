@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>数组去重</title>
+		<meta name="Keywords" content="关键词,关键词">
+		<meta name="description" content="">
+		<style type="text/css">
+			*{
+				margin:0;
+				padding: 0;
+				list-style: none;
+				text-decoration:none;
+				font: 12px/"微软雅黑";
+			}
+			.box{
+				width: 700px;
+				height: 500px;
+				margin:100px auto;
+				text-align: center;
+				box-shadow: 0 0 10px #222;
+				vertical-align: middle;
+			}
+			h2{
+				padding: 10px;
+				font-weight: bold;
+			}
+			input{
+				display: inline-block;
+				vertical-align: middle;
+				margin:10px;
+				width: 600px;
+				height: 50px;
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="box">
+				<h2>数字去重(以空格隔开)</h2>
+				<input type="text" id="text1" value="" />
+				<input type="text" id="text2" value="" />
+				<input type="button" id="btn" value="去重" />
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		 var textInp1=document.getElementById('text1');
+		 var textInp2=document.getElementById('text2');
+		 var btn=document.getElementById('btn');
+		/*var arr=[1,2,4,5,6];*/
+		/*console.log(arr)*/
+		btn.onclick=function(){
+			var new1=textInp1.value;
+			var arrNew1=new1.split(' ');
+			for(var i=0;i<arrNew1.length;i++){
+				for(var j=arrNew1.length;j>i;j--){
+					if (arrNew1[j]==''){
+		 			arrNew1.splice(j,1);
+		 			console.log(arrNew1);
+		 		}
+					if(arrNew1[i]==arrNew1[j]){
+						arrNew1.splice(j,1);
+					}	
+				}
+			}
+			
+		/*	textInp1.value=" ";*/
+			textInp2.value=arrNew1.join();
+			
+		}
+	   
+	</script>
+</html>

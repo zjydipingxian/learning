@@ -1,0 +1,47 @@
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+	font: 12/1.5 '微软雅黑';
+}
+
+#box{
+	width: 300px;
+	border: 1px solid #ccc;
+	margin: 50px auto;
+}
+
+.msg{
+	height: 30px;
+	line-height: 30px;
+    background: #000;
+}
+
+.msg h2{
+	float: left;
+	font-size: 15px;
+	color: #fff;
+	margin-left:10px;
+	margin-right: 10px;
+}
+.msg #inp{
+	float: left;
+	display: none;
+}
+.msg input{
+	float: left;
+	margin-top: 5px;
+}
+
+.msg button{
+	border: none;
+	background: #368;
+}
+
+.msg span{
+	float: right;
+	color: #fff;
+	font-size: 15px;
+	cursor: pointer;
+}

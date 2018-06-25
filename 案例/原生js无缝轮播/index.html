@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>原生js无缝轮播</title>
+		<meta name="Keywords" content="关键词,关键词">
+		<meta name="description" content="">
+		<link rel="stylesheet" type="text/css" href="css/banner.css"/>
+		<script type="text/javascript" src="js/move.js" ></script>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="box">
+				<ul class="banner">
+					<li><img src="images/1.jpg" alt="Tmall" width="" height=""/></li>
+					<li><img src="images/2.jpg" alt="Tmall" width="" height=""/></li>
+					<li><img src="images/3.jpg" alt="Tmall" width="" height=""/></li>
+					<li><img src="images/4.jpg" alt="Tmall" width="" height=""/></li>
+					<li><img src="images/5.jpg" alt="Tmall" width="" height=""/></li>
+					<li><img src="images/6.jpg" alt="Tmall" width="" height=""/></li>
+					<li><img src="images/1.jpg" alt="Tmall" width="" height=""/></li>
+				</ul>
+				<div class="btn">
+					<ul class="btnList clearfix">
+						<li class="on">1</li>
+						<li>2</li>
+						<li>3</li>
+						<li>4</li>
+						<li>5</li>
+						<li>6</li>
+					</ul>
+				</div>
+				<div class="tab prev"></div>
+		  	    <div class="tab next"></div>	
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		(function (){
+		var box=document.getElementsByClassName('box')[0];
+        var oUl =document.getElementsByClassName('banner')[0];
+        var obtn=document.querySelectorAll('.btnList li'); //小圆点
+        var next=document.getElementsByClassName('next')[0];
+        var prev=document.getElementsByClassName('prev')[0];
+        var len=obtn.length;
+        var timer,num=0;
+		        for (var i=0;i<len;i++){
+		        	obtn[i].index=i;
+		        	obtn[i].onclick=function(){
+		        		obtn[num].className='';
+		        		num=this.index;
+		        		obtn[num].className="on";
+		        		move(oUl,{left:-num*1226},500)
+		        	}
+		        }
+		        auto();
+		        function auto(){
+		        	timer=setInterval(function(){
+		        		obtn[num].className='';
+		        		num++;
+		        		obtn[num%len].className='on';
+		        		Max();
+		        	},1500)
+		        }
+			//下一张
+			next.onclick=function(){
+				obtn[num].className='';
+				num++;
+				obtn[num%len].className='on';
+				Max();
+			}
+			//上一张
+			prev.onclick=function(){
+				obtn[num].className='';
+				num=num<=0?len:num;
+				if(num==6){
+					oUl.style.left = -len*1226+'px';	
+					}
+				num--;
+				obtn[num].className='on';
+				move(oUl,{left:-num*1226},500);
+			}
+			function Max(){
+				move(oUl,{left:-num*1226},500,function(){
+					if(num==6){
+						oUl.style.left = "0px";
+						num=0;
+					}
+				})
+			}
+			box.onmouseenter = function () {clearInterval(timer)}
+			box.onmouseleave = auto;
+        
+    })();
+	</script>
+</html>	

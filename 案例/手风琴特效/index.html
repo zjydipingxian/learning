@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+    <meta name="Anthor" content=""/>
+	<title>手风琴特效</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;list-style: none;text-decoration: none;}
+		body{background: url("images/1.jpg") no-repeat center/cover}
+		 #box{overflow: hidden;width: 1090px;: 429px;margin: 200px auto 0;}
+        #box ul{width: 1000%;height: 100%;}
+        #box ul li{overflow: hidden;float: left; width: 100px;height: 429px;}
+        #box ul li p{width: 14px;height: 400px;padding: 29px 43px 0;background: rgb(0,0,0);background: rgba(0,0,0,.5);color: #fff;font-size: 14px;text-align: center;}
+	</style>
+</head>
+<body id="bj">
+	<div id="box">
+        <ul>
+            <li>
+                <p>我的个人拉萨之旅丨丨故事之城</p>
+            </li>
+            <li>
+                <p>我的个人拉萨之旅丨丨故事之城</p>
+            </li>
+            <li>
+                <p>我的个人拉萨之旅丨丨故事之城</p>
+            </li>
+            <li>
+                <p>我的个人拉萨之旅丨丨故事之城</p>
+            </li>
+        </ul>
+   </div>
+</body>
+	 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript">
+		var $oli = $('li'),
+			$bj = $('#bj');
+			console.log($bj)
+		$oli.first().width(789);
+		var  ImgArr = ['images/1.jpg','images/2.jpg','images/3.jpg','images/4.jpg'];
+		 $oli.each(function(index, val) {
+		 	$(this).css("background-image","url("+ImgArr[index]+")");
+		 });
+
+		$oli.mouseenter(function () {
+			 var  index = $(this).index();  //获取当前li元素下标。
+		  	  	  $bj.css("background","url("+ImgArr[index]+") no-repeat center/cover").fadeIn(300);
+            $(this).stop().animate({
+                width : 789
+            },500).siblings().stop().animate({
+                width : 100
+            },500);
+        });
+	</script>
+</html>

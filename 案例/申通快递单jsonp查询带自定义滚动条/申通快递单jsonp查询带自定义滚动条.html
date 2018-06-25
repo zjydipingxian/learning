@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" onselectstart='return false'>
+<head>
+	<meta charset="UTF-8">
+	<title>申通快递单jsonp查询</title>
+
+	<style type="text/css">
+		*{padding: 0;margin: 0;}
+		#box{
+			width: 518px;
+			border: 1px solid #ddd;
+			box-shadow: 3px 3px 10px 0px #ddd;
+			margin: 100px auto;
+			padding: 10px;
+		}
+		.top{
+			height: 82px;
+			background: rgb(250,250,250);
+			overflow: hidden;
+		}
+		.top .ot{
+			height: 26px;
+			line-height: 26px;
+			margin: 10px 0px 0px 10px;
+			font-size: 0px;
+			color: #333;
+		}
+		.top .ot span{
+			font-size: 12px;
+			margin-right: 15px;
+			vertical-align: middle;
+		}
+		.top .ot div.o-1,.top .ot div.o-2{
+			width: 164px;
+			height: 24px;
+			line-height: 24px;
+			text-indent: 10px;
+			display: inline-block;
+			border-top: 1px solid #999;
+			border-right: 1px solid #ddd;
+			border-bottom: 1px solid #ddd;
+			border-left: 1px solid #999;
+			vertical-align: middle;
+		}
+		.top .ot div.o-2{
+			position: relative;
+			width: 24px;
+			border-left: none;
+			vertical-align: middle;
+		}
+		.top .ot div.o-2::after{
+			content: '';
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin-top: -2.5px;
+			margin-left: -3.5px;
+			border-top: 4.5px solid rgb(137,137,137);
+			border-left: 4.5px solid transparent;
+			border-right: 4.5px solid transparent;
+			border-bottom: none;
+		}
+		.top .ot input{
+			width: 189px;
+			height: 24px;
+			line-height: 24px;
+			text-indent: 10px;
+			border-top: 1px solid #999;
+			border-right: 1px solid #ddd;
+			border-bottom: 1px solid #ddd;
+			border-left: 1px solid #999;
+			outline: none;
+			vertical-align: middle;
+		}
+		.top .ot div.search{
+			display: inline-block;
+			width: 56px;
+			height: 26px;
+			line-height: 26px;
+			font-size: 14px;
+			text-align: center;
+			background: rgb(56,139,255);
+			color: #fff;
+			vertical-align: middle;
+			margin-left: 10px;
+			cursor: pointer;
+		}
+
+		.top .ot div.o-1 img{
+			width: 16px;
+			height: auto;
+			vertical-align: middle;
+		}
+		.top .ot div.o-1 span{
+			margin-left: 10px;
+		}
+		.bottom{
+			margin-top: 10px;
+		}
+		.info .com{
+			display: inline-block;
+			width: 400px;
+			font-size: 12px;
+			vertical-align: top;
+			margin-left: 5px;
+			color: #333;
+		}
+		.info .com p:nth-of-type(1){
+			font-weight: bold;
+		}
+		.info .com p,.info .com div{
+			margin-bottom: 5px;
+		}
+		.info .com a{
+			color: blue;
+		}
+		.btn-list div{
+			display: inline-block;
+			width: 58px;
+			height: 20px;
+			border: 1px solid rgb(216,216,216);
+			line-height: 20px;
+			text-align: center;
+			color: #333;
+			font-size: 12px;
+			margin-right: 5px;
+			cursor: pointer;
+		}
+		.btn-list div:nth-of-type(1){
+			margin-left: 65px;
+		}
+		.btn-list div:hover{
+			border: 1px solid rgb(56,139,255);
+		}
+		.logo{
+			font-size: 12px;
+			color: #999;
+			vertical-align: middle;
+			overflow: hidden;
+			vertical-align: middle;
+		}
+		.logo div{
+			float: right;
+			cursor: pointer;
+		}
+		.logo img{
+			vertical-align: middle;
+		}
+		.logo div:hover span{
+			text-decoration: underline;
+		}
+		.hide{
+			position: relative;
+			height: 280px;
+			overflow: hidden;
+			display: none;
+			border-top: 1px solid rgb(245,245,245);
+			border-bottom: 1px solid rgb(245,245,245);
+		}
+		div.hide.none{
+			height: 125px;
+			line-height: 125px;
+			text-align: center;
+			font-size: 12px;
+		}
+		.hide ul{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+		}
+		.hide ul li{
+			position: relative;
+			height: 44px;
+			border-bottom: 1px solid rgb(245,245,245);
+			font-size: 12px;
+		}
+		.hide ul li .pointer{
+			position: absolute;
+			top: 26px;
+			left: 10px;
+			width: 6px;
+			height: 6px;
+			border-radius: 50%;
+			background: rgb(161,188,229);
+		}
+		.hide ul li .sche{
+			margin-left: 70px;
+			margin-top: 12px;
+			color: #333;
+		}
+		.hide ul li .sche p:nth-of-type(2){
+			margin-top: 3px;
+		}
+		.hide ul li.red .sche{
+			font-weight: bold;
+			color: rgb(245,64,64);
+		}
+		.hide ul li.red .pointer{
+			top: 16px;
+			background: rgb(245,64,64);
+		}
+		.hide ul li .pointer::after{
+			content: '';
+			position: absolute;
+			left: 2px;
+			top: 10px;
+			width: 2px;
+			height: 46px;
+			background: rgb(236,236,236);
+		}
+		.hide ul li.red .pointer::after{
+			content: '';
+			position: absolute;
+			left: 2px;
+			top: 10px;
+			width: 2px;
+			height: 58px;
+			background: rgb(236,236,236);
+		}
+		.hide ul li.red div.new{
+			position: absolute;
+			top: 10px;
+			left: 25px;
+			width: 34px;
+			height: 18px;
+			line-height: 18px;
+			text-align: center;
+			color: #fff;
+			background: rgb(245,64,64);
+		}
+		.prompt{
+			display: inline-block;
+			font-size: 12px;
+			color: rgb(245,64,64);
+			vertical-align: middle;
+			margin-left: 10px;
+			display: none;
+		}
+		.hide .scroll-bar{
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 15px;
+			/*height: 100%;*/
+			background: #ddd;
+			border-radius: 8px;
+		}
+		.hide .scroll-bar .inner-bar{
+			position:absolute;
+			top:0;
+			left:0;
+			width:100%;
+			background: skyblue;
+			opacity: 0.5;
+			border-radius: 8px;
+		}
+	</style>
+</head>
+<body>
+	<div id='box'>
+		<div class='top'>
+			<div class='ot'>
+				<span>公司称号</span>
+				<div class='o-1'>
+					<img src="images/ems2.png">
+					<span>申通快递</span>
+				</div>
+				<div class='o-2'></div>
+			</div>
+			<div class='ot'>
+				<span>快递单号</span>
+				<input type='text' placeholder="请输入您的快递单号" />
+				<div class='search'>查询</div>
+				<div class='prompt'>请输入13位订单号</div>
+			</div>
+		</div>
+		<div class='hide'>
+		</div>
+		<div class="bottom">
+			<div class='info'>
+				<img src="images/ems2.png"> 
+				<div class='com'>
+					<p>申通快递</p>
+					<div>
+						<span>官网地址：</span>
+						<a href='http://www.sto.cn'>www.sto.cn</a>
+					</div>
+					<p>客服电话：95543</p>	
+				</div>
+			</div>
+			<div class='btn-list'>
+				<div>网点查询</div>
+				<div>网上寄件</div>
+			</div>
+			<div class='logo'>
+				<div>
+					<img src='images/ems3.png'>
+					<span>数据来源申通快递</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src='js/scrollBar.js'></script>
+	<script type="text/javascript">
+		window.onload = function(){
+
+			(function(){
+
+				var oBox = document.getElementById('box'),
+					oInput = oBox.getElementsByTagName('input')[0],
+					oSearch = oBox.getElementsByClassName('search')[0],
+					oHide = oBox.getElementsByClassName('hide')[0],
+					oUl = oHide.getElementsByTagName('ul')[0];
+
+				oSearch.onclick = function(){
+					var prompt = oBox.getElementsByClassName('prompt')[0];
+					var val = oInput.value;
+					var reg = /^\d{13}$/;
+
+					if(!val.match(reg)){
+						oHide.style.display = 'none';
+						prompt.style.display = 'inline-block';
+						return;
+					}
+
+					prompt.style.display = 'none';
+
+					var script = document.createElement('script');
+					script.src = 'https://sp0.baidu.com/9_Q4sjW91Qh3otqbppnN2DJv/pae/channel/data/asyncqury?cb=getInfo&appid=4001&com=shentong&nu='+val;
+					document.body.appendChild(script);
+					script.onload = function(){
+						document.body.removeChild(this);
+					}
+				}
+
+				
+			})();
+
+		}
+
+		function getInfo(obj){
+			var data = obj.data.info.context,
+				oHide = document.getElementsByClassName('hide')[0];
+			oHide.style.display = 'block';
+			if(data){
+				oHide.className = 'hide';
+				oHide.innerHTML = '<ul></ul><div class="scroll-bar"><div class="inner-bar"></div></div>';
+				setData(data);
+				var oView = oHide.getElementsByTagName('ul')[0],
+					scrollBar = oHide.getElementsByClassName('scroll-bar')[0];
+					scrollBar.style.height = oHide.clientHeight + 'px';
+					innerBar = oHide.getElementsByClassName('inner-bar')[0];
+				new ScrollBar(oHide,oView,innerBar,scrollBar);
+			}else{
+				oHide.className = 'hide none';
+				oHide.innerHTML = '：( 该单号暂无物流进展，请稍后再试，或检查公司和单号是否有误。';
+			}
+			
+		}
+
+		function setData(data){
+			var oUl = document.getElementsByTagName('ul')[0],
+				length = data.length;
+			for(var i=0;i < length; i++){
+				var json = data[i],
+					desc = json.desc,
+					date = new Date(json.time*1000),
+
+					year = date.getFullYear(),
+					month = date.getMonth()+1,
+					day = date.getDate(),
+					hh = date.getHours(),
+					mm = date.getMinutes(),
+					ss = date.getSeconds();
+					hh = hh<10?'0'+hh:hh;
+					mm = mm<10?'0'+mm:mm;
+					ss = ss<10?'0'+ss:ss;
+					console.log(date);
+				var	oLi = document.createElement('li'),
+					pointer = document.createElement('div'),
+					sche = document.createElement('div'),
+					oT = document.createElement('p'),
+					oD = document.createElement('p');
+
+				pointer.className = 'pointer';
+				sche.className = 'sche';
+				oT.innerHTML = hh<13?year+'年'+month+'月'+day+'日 上午 '+hh+':'+mm+':'+ss:year+'年'+month+'月'+day+'日 下午 '+(hh-12)+':'+mm+':'+ss;
+				oD.innerHTML = desc;
+				sche.appendChild(oT);
+				sche.appendChild(oD);
+				oLi.appendChild(pointer);
+				oLi.appendChild(sche);
+				if(i===0){
+					var newDiv = document.createElement('div');
+					newDiv.className = 'new';
+					newDiv.innerHTML = '最新';
+					oLi.appendChild(newDiv);
+					oLi.className = 'red';
+				}
+				oUl.appendChild(oLi);
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>无缝轮播</title>
+    <link rel="stylesheet" href="css/banner.css">
+</head>
+
+<body>
+    <div id="box">
+        <ul class="pic">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <ul class="tab">
+            <li class="on"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div id="btn">
+            <span class="prev"><</span>
+            <span class="next">></span>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/animation.js"></script>
+    <script type="text/javascript">
+    var ColorArr = ['#EEB422', '#E8E8E8', '#CDB38B', '#B9D3EE', '#8B4726', '#6495ED'], //存数组的颜色
+
+        picBox = document.getElementsByClassName("pic")[0],
+        picLi = document.querySelectorAll('.pic li'),
+        tabLi = document.querySelectorAll('.tab li'),
+        span = document.querySelectorAll('#btn span'),
+        index = 0,
+        clickTime = 0,
+        length = tabLi.length;
+    var cNode = picLi[0].cloneNode(true);
+    cNode.style.background = ColorArr[0];
+    cNode.innerHTML = 1;
+    document.querySelectorAll('.pic')[0].append(cNode);
+    for (var i = 0; i < tabLi.length; i++) {
+        tabLi[i].index = i;
+        picLi[i].style.background = ColorArr[tabLi[i].index]; //给每个li上颜色
+        picLi[i].innerHTML = tabLi[i].index + 1; // 1 - 6
+        tabLi[i].onclick = function() {
+            tabLi[index].className = '';
+            if (index === this.index) return;
+            animation(picBox, {
+                data: {
+                    left: this.index * -640
+                },
+                option: {
+                    easing: "Back",
+                    speed: 2
+                }
+            }, 500);
+            index = this.index;
+            tabLi[index].className = 'on';
+        }
+    }
+    // btn轮播
+    for (var i = 0; i < 2; i++) {
+        (function(i) {
+            span[i].onclick = function() {
+                if (new Date() - clickTime >= 200) {
+                    clickTime = new Date();
+                    if (i) {
+                        tabLi[index].className = '';
+                        index++;
+                        tabLi[index %= length].className = 'on';
+                        Max();
+                    } else {
+                        tabLi[index].className = '';
+                        index = index <= 0 ? length : index;
+                        if (index == 6) {
+                            picBox.style.left = -length * 640 + 'px';
+                        }
+                        index--;
+                        tabLi[index].className = 'on';
+                        animation(picBox, {
+                            data: {
+                                left: -index * 640
+                            },
+                            option: {
+                                easing: "Back",
+                                speed: 3
+                            }
+                        }, 250);
+                    }
+                }
+            }
+        })(i);
+    }
+
+    function Max() {
+        animation(picBox, {
+            data: {
+                left: -index * 640
+            },
+            option: {
+                easing: "Back",
+                speed: 3
+            }
+        }, 250, function() {
+            if (index == 6) {
+                animation(picBox, {
+                    data: {
+                        left: 0 //
+                    },
+                    option: {
+                        easing: "Back",
+                        speed: 3
+                    }
+                }, 250)
+                index = 0;
+            }
+
+            console.log(index)
+        })
+    }
+    </script>
+</body>
+
+</html>

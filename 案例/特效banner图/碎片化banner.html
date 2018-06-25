@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>碎片化banner</title>
+	<link rel="stylesheet" href="">
+	<style type="text/css">
+		*{margin: 0;padding: 0;list-style: none;text-decoration: none;font: 12/1.5 "微软雅黑"};
+		.clearfix:after{content:'';display:block;clear:both;}
+		#wrap{width: 590px;height: 470px;margin: 50px auto;position: relative;}
+		.banner{width: 100%;height: 100%;}
+		.banner li {position: absolute;top: 0;left: 0;display: none;}
+		.banner li.on{display: block}
+		.banner li img{display: block;}
+		#mark{ position: absolute;width:100%; height:100%;top: 0}
+		#mark li {float:left;}
+		#tab{position: absolute;left: 46px;bottom: 20px;}
+		#tab span{display: inline-block;width: 10px;height: 10px;border-radius: 50%;border: 2px solid #b9beba;cursor: pointer;margin: 0 5px;}
+		#tab span.on{background: #fff;}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<ul class="banner clearfix">
+			<li class="on"><img src="images/1.jpg" alt=""/></li>
+			<li><img src="images/2.jpg" alt="" /></li>
+			<li><img src="images/3.jpg" alt="" /></li>
+			<li><img src="images/4.jpg" alt="" /></li>
+			<li><img src="images/5.jpg" alt="" /></li>
+		</ul>
+		<ul id="mark"></ul>
+		<div id="tab">
+			<span class="on"></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		var $banner_aLi = $('ul.banner li'),
+            $banner_aImg = $('ul.banner li img'),
+            $tab_ali = $('#tab span'),
+            $mark = $('#mark').eq(0),
+            w_num = 8,//$mark里面水平方向li的个数
+            h_num = 8,//$mark里面垂直方向li的个数
+            w = $mark.width() / w_num,//一个li的宽
+            h = $mark.height()/ h_num,//一个li的宽
+            num = 0,//设置默认下标
+            src,
+            timer,
+            arr = [];//用来放li
+
+        $tab_ali.click(function () {
+        	$tab_ali.eq(num).removeClass('on');//按钮
+            $banner_aLi.eq(num).removeClass('on');
+            src = $banner_aImg.eq(num).attr('src');
+            //console.log( src );
+            createLi();
+            num = $(this).index();//更新num
+            $tab_ali.eq(num).addClass('on');//有img的li
+            $banner_aLi.eq(num).addClass('on');	
+        });
+
+        function createLi() {
+           	$mark.empty();//清空$mark内容
+            clearInterval(timer);
+            for (var i = 0; i < w_num; i++) {
+            	for (var j = 0; j < h_num; j++) {
+            		var $oLi = $('<li></li>');//生成li
+            			$oLi.css({
+            				width: w,
+            				height: h,
+            				transition:'1s',
+            				backgroundImage : 'url('+src+')',
+            				backgroundPosition : '-'+(i * w)+'px -'+(j * h)+'px'
+            			});
+            		//自定义坐标
+                    $oLi.x = i;
+                    $oLi.y = j;
+                    $mark.append($oLi);//写入页面	
+                    $oLi.css({//一定得写入页面后添加left，top
+                        left:$oLi.position().left,
+                        top:$oLi.position().top,
+                    })
+
+                    arr.push($oLi);//放入arr数组
+            	}
+            }
+            //单独给定位
+            $mark.children().each(function(index,item){
+                  $(item).css({position:'absolute'});
+            });
+            //随机消失
+            var count = 0;
+            timer = setInterval(function () {
+            	$(arr).each(function (index,item) {
+            		if( item.x + item.y == count ){
+                        item.css({
+                            transform:'translate(-100px,-100px) rotate(150deg)'
+                        }).fadeOut();
+                    }
+            	});
+            	count++;
+            	if( count > w_num + h_num){
+                    clearInterval(timer);
+                  }
+            }, 1000 / 60)
+        }    
+	</script>
+</body>
+</html>

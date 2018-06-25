@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>时间跳转</title>
+		<meta name="Keywords" content="关键词,关键词">
+		<meta name="description" content="">
+		<link rel="stylesheet" type="text/css" href="css/timer.css"/>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="box">
+				<ul>
+					<li class="time">
+						<div class="timeCon">
+							<span class="first time1"></span>
+							<span class="second time1"></span>
+						</div>
+					</li>
+					<li class="time">
+						<div class="timeCon">
+							<span class="first time1"></span>
+							<span class="second time1"></span>
+						</div>
+					</li>
+					<li class="d"></li>
+					<li class="time">
+						<div class="timeCon">
+							<span class="first time1"></span>
+							<span class="second time1"></span>
+						</div>
+					</li>
+					<li class="time">
+						<div class="timeCon">
+							<span class="first time1"></span>
+							<span class="second time1"></span>
+						</div>
+					</li>
+					<li class="d"></li>
+					<li class="time">
+						<div class="timeCon">
+							<span class="first time1"></span>
+							<span class="second time1"></span>
+						</div>
+					</li>
+					<li class="time">
+						<div class="timeCon">
+							<span class="first time1"></span>
+							<span class="second time1"></span>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var T_Con=document.getElementsByClassName('timeCon'); //获取包住span的div
+		var first=document.getElementsByClassName('first'); //第一个span
+		var second=document.getElementsByClassName('second'); //第2个span
+		var len=T_Con.length;
+		var fals=true;
+		var lastStr="";
+		
+		//setInterval(fu(),1000);
+		first.TT=setInterval((function fu(){
+			var nowT=new Date();
+			var hh=auto(nowT.getHours()).toString();
+			var mm=auto(nowT.getMinutes()).toString();
+			var ss=auto(nowT.getSeconds()).toString();
+			var t=(hh+mm+ss);
+			if (fals) {
+				for(var i=0;i<len;i++){
+				T_Con[i].index = i;
+				first[i].style.background='url("images/'+t.charAt(i)+'.png")';
+				}
+				 fals = false;
+			} else{
+				for(var i=0;i<len;i++){	
+				second[i].style.background='url("images/'+t.charAt(i)+'.png")';
+				}
+				for (var i = 0; i < len; i++) {
+                if ( lastStr.charAt(i) !== t.charAt(i) ){
+                    move( T_Con[i] , "top" , -60 , 6 , function (){
+                        this.style.top = '0px';                       first[this.index].style.background='url("images/'+t.charAt(this.index)+'.png")';
+                    });
+                	}
+            	}
+			}
+				lastStr = t;
+				return fu;
+		})(),1000);
+				
+		 
+	
+		//运动框架
+    function move( obj , attr , target , speed , callback ) {
+    	//兼容动画
+        window.requestAnimationFrame = window.requestAnimationFrame || function (fn) {return setTimeout(fn , 1000/60)};
+        //兼容清除动画
+        window.cancelAnimationFrame = window.cancelAnimationFrame || clearTimeout;
+        var getStyle = obj.currentStyle || getComputedStyle(obj); //兼容获取样式.
+        var init = parseFloat(getStyle[attr]);  //初始值存放
+        var flag = init > target;  //先判断谁大
+        if ( flag ){
+        	speed = -speed;
+        }
+        (function run(){
+            init += speed;
+            /*if(flag?init <= target:init >= target){
+            	init=target;
+            }else{
+            	requestAnimationFrame(run);
+            }*/
+            (flag?init <= target:init >= target)?init = target:requestAnimationFrame(run);
+            obj.style[attr] = init+'px';
+            if( init === target ){
+                callback && callback.call(obj);
+            }
+        })();
+    }
+	  	function auto(n){
+	        return n<10?"0"+n:n;
+	    }
+	</script>
+</html>

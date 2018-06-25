@@ -1,0 +1,82 @@
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+	font: 12/1.5 "微软雅黑";
+}
+#box{
+	position: relative;
+	width: 640px;
+	height: 360px;
+	margin: 50px auto;
+	overflow: hidden;
+}
+#box .pic {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 1000%;
+}
+#box .pic li {
+	float: left;
+	width: 640px;
+	height: 360px;
+	color: #fff;
+	text-align: center;
+	font-size: 50px;
+	line-height: 360px;
+}
+#box .tab{
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	margin-left: -160px;
+	transition: .5s;
+	transform: scale(.8);
+	border-radius: 30px;
+    padding: 0 5px;
+}
+/* #box .tab:hover{
+	background: rgba(0,0,0,.5);
+	transform: scale(1.2);
+} */
+#box .tab li{
+	background: #f60;
+    width: 40px;
+    height: 9px;
+    line-height: 25px;
+    display: inline-block;
+    overflow: hidden;
+    margin-left: 5px;
+    cursor: pointer;
+    opacity: .3;
+}
+#box .tab li.on{
+	background: #f60;
+	opacity: 1;
+	z-index: 99;
+	background: #fff;
+}
+body{
+	background: #222;
+}
+
+#btn span{
+	position: absolute;
+	top: 50%;
+	margin-top: -30px;
+	width: 30px;
+	height: 60px;
+	background: rgba(0,0,0,.2);
+	text-align: center;
+	font-size: 18px;
+	line-height: 60px;
+	color: #fff;
+	cursor: pointer
+}
+#btn span.next{
+	right: 0;
+
+}

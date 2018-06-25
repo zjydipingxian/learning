@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		li,ul{list-style: none;}
+		a{text-decoration: none;}
+		#box{width: 1000px;height: 100px;background:#368; }
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+	<script type="text/javascript">
+		var box = document.getElementById('box');
+		Move(box,'width',100,5000);
+		/**
+		 * [Move description]
+		 * @param {[type]} obj    [对象]
+		 * @param {[type]} attr   [属性]
+		 * @param {[type]} target [目标]
+		 * @param {[type]} time   [时间]
+		 */
+		function Move(obj,attr,target,time) {
+			var Stime =  new Date;  //获取初始时间;
+			var objCss=getCss(obj);
+			var sVal=parseFloat(objCss.width); //获取初始位置
+
+			var tVal=target; //获取终点位置;
+			//var eTime=Stime+time; //获取结束时间
+
+			function m() {
+				var Tx =  new Date(); //Tx当前时间
+				//匀速
+				
+				//var Sx = (tVal-sVal)*(Tx-Stime) / time + sVal;
+
+
+				//加速
+				var Sx = (tVal-sVal)*(Tx-Stime)*(Tx-Stime) / (time*time) + sVal;
+				obj.style[attr] = Sx+'px';
+				if (Tx-Stime>=time) {
+					Sx=tVal;
+					obj.style[attr] = Sx+'px';
+				} else {
+					requestAnimationFrame(m);
+				}
+			}
+				requestAnimationFrame(m);
+		}
+
+		/**
+			样式获取
+		 */
+		function  getCss(obj){
+			return obj.currentStyle || getComputedStyle(obj);
+		}
+
+	</script>
+</html>

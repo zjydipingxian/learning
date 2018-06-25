@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ajax封装</title>
+</head>
+<body>
+	<script type="text/javascript">
+		
+		var data = {};
+		ajax({
+			type : "GET",
+			url : "",
+			data : data,
+			success : function (msg) {
+				// body...
+			},
+			error : function (msg) {
+				
+			}
+		});
+
+		/**
+		 * [ajax 封装]''
+		 *  type : get / post  默认get
+		 *  url : url   必须
+		 *  data : data   选
+		 *  成功 : success 选
+		 *  失败 : error 选 
+		 * @return {[type]} [description]
+		 */
+		function ajax( json ) {
+			var type = josn.type || "GET",
+				url = json.url,
+				data = json.data || "",
+				success = json.success,
+				error = josn.error;
+
+			//判断data	
+			if (data) {
+				var str = '';
+				for (var key in data) {
+					str += key + "=" data[key] + '&';
+				}
+				str += "_=" + new Date().getTime();
+				data = str;
+				if ( /get/i.test(type) ) {
+					url += "?"+data;
+				}
+			}
+				//请求部分
+				var xhr = new XMLHttpRequest();
+				xhr.open(type, url , true);
+				xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				xhr.send( data );
+				xhr.onreadystatechange=function () {
+		        if( this.readyState===4 ){
+		            var status = this.status;  //http状态码
+		            if( status>=200 && status<300 ){
+		                success && success( this.responseText )
+		            }else{
+		                error && error( status )
+		            }
+		        }
+		    }
+		}
+	</script>
+</body>
+</html>

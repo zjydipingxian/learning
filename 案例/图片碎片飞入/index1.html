@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>原生js购物车抛物线</title>
+	<link rel="stylesheet" href="">
+	<style type="text/css">
+		body{
+			background: #f1f1f1;
+		}
+		#box{
+			width: 410px;
+			height: 610px;
+			box-shadow: 0 0 10px #222;
+			margin: 10px auto;
+
+		}
+		button{
+		    width: 9.5em;
+		    display: block;
+		    -webkit-border-radius: 6px;
+		    -moz-border-radius: 6px;
+		    -ie-border-radius: 6px;
+		    border-radius: 6px;
+		    padding: .48em .8em;
+		    text-shadow: rgba(0,0,0,.5) 0px -1px 0px;
+		    font-size: 18px;
+		    font-weight: 700;
+		    -webkit-transition-property: background-color;
+		    -webkit-transition-duration: .15s;
+		    -webkit-transition-timing-function: ease-in-out;
+		    cursor: pointer;
+		    text-decoration: none;
+		    margin-bottom: 20px;
+		    background-color: #64a8a6;
+    		color: #dafffe;
+    		box-shadow: 0px 0px 0px 1px #4e8381 inset, 0px 0px 0px 2px #74b6b4 inset, 0px 4px 0px 0px #4a7c7b, 0px 5px 0px 0px #355655, 0px 8px 0px 0px rgba(0,0,0,.15);
+		}
+		#conter{
+			position: relative;
+			left: 350px;
+			top: 300px;
+			border: 1px solid #222;
+			width: 52px;
+			height: 30px;
+			text-align: center;
+			line-height: 30px;
+			border-radius: 10px;
+			/*position: absolute;*/
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<button type="button" class="btn">商品</button>
+		<div id="conter">
+			<span>购物车</span>
+			<h2 id="text">0</h2>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var oBtn = document.getElementsByClassName('btn'),
+			conter = document.getElementById('conter'),
+			text = document.getElementById('text'),
+		   	index =0;
+
+		
+		for (var i = 0; i < oBtn.length; i++) {
+			oBtn[i].i = i;
+			oBtn[i].onclick = function (argument) {
+				var startX = oBtn[this.i].offsetLeft + 60,   //获取初始位置
+					startY = oBtn[this.i].offsetTop +60;
+
+				var endX = conter.offsetLeft,   //获取终点位置
+					endY = conter.offsetTop;
+
+				var spacingX = endX - startX,    //距离差
+					spacingY = endY - startY;
+
+				// 假设中点(0, 0)，也就是方程中的c为0   y = ax2 + bx + c
+				var c = 0,
+					a = (endY / endX - startY / startX) / (endX - startX),
+					b = endY / endX - a * endX;
+
+			
+				//创建节点对象
+				var oDIv = 	document.createElement("div");
+					oDIv.style.position = 'fixed';
+					oDIv.style.left = startX + 'px';
+					oDIv.style.top = startY + 'px';
+					oDIv.style.width = '20px';
+					oDIv.style.height = '20px';
+					oDIv.style.borderRadius = '50%';
+					oDIv.style.background = randomColor();
+					conter.appendChild(oDIv);
+		   	
+
+
+				//让它运动起来，启动定时器
+					var x =  startX,
+						y =  startY,
+						str = '',
+						timer;
+						index++;	
+					str += index; //统计小球
+
+				~function m() {
+					if (x < endX) {
+						x += 3;   // ax2 + bx + c
+						y = a * x * x + b * x;
+						oDIv.style.left = x + 'px';
+	    				oDIv.style.top = y + 'px';
+					} else {
+						text.innerHTML = str;
+						oDIv.parentNode && conter.removeChild(oDIv);
+						cancelAnimationFrame(timer);
+					}
+					timer = requestAnimationFrame(m);
+				}();
+			}
+		}
+
+		//随机颜色
+		function randomColor() {
+    		return '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6);
+    	}	
+	</script>
+</body>
+</html>

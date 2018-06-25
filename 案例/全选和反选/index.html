@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>全选or反选</title>
+	<!-- 全选or反选布局样式 -->
+	<link rel="stylesheet" type="text/css" href="css/checked.css">
+</head>
+<body>
+	<div id="box">
+		<h2>选择你喜爱的运动项目</h2>
+		<ul id="item">
+			<!-- <li><i class='iconfont icon-fuxuankuang'></i></li> -->
+		</ul>
+		<!-- 全选反选 -->
+		<div class="chooseType">
+			<p id="choose">
+	            <i class="ck"></i>
+	            <span id="add">全选</span>
+        	</p>
+        	<p id="Uncheck">反选</p>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var oUl = document.getElementById('item'),
+			oLi = oUl.getElementsByTagName('li'), //列表
+			oI =  oUl.getElementsByTagName('i'),
+			//add = document.getElementById('add'), // 全选
+			Uncheck = document.getElementById('Uncheck'), //反选
+			choose = document.getElementById('choose'),
+			aI = choose.getElementsByTagName('i')[0],
+			ck = "ck",//未选中
+        	cked = "cked",//选中
+			TextArr = ['足球', '乒乓球' ,'羽毛球' ,'游泳' ,'跑步' ,'拳击'],
+			length = TextArr.length;
+
+		choose.checked = false;  //默认没有
+		//动态生成li内容
+		var str = '';
+		for (var i = 0; i < length; i++) {
+			var x = i % 2 + 1;
+			str += "<li class='li" + x + "'><i class='ck'></i> " + TextArr[i] + "</li>"
+		}
+		oUl.innerHTML = str;
+
+		for ( i = 0; i < length; i++) {
+			oLi[i].index = i; //自定义索引
+			oLi[i].checked = false; // 自定义属性没选中
+			oLi[i].onclick = function () {
+				oI[ this.index ].className = [ this.checked ? ck : cked ];  //选中就是添加cked 反ck
+				this.checked= !this.checked;
+				//判断li是否被全部选中过
+				var flag = true; //假设选中
+				for (var j = 0; j < length; j++) {   
+					if (!oLi[j].checked) {    //如果有未选中的才进行判断.
+						flag = false;
+						break;
+					}
+				}
+				// 根据 flag的 t 或 f进行判断
+				aI.className = [ flag ? cked : ck ];
+				choose.checked = flag;
+			}
+		}
+		//全选
+		choose.onclick = function () {
+			for (var i = 0; i < length; i++) {
+				var x = this.checked ? ck : cked,
+					y = this.checked ? false : true;
+
+					aI.className = x;
+					oI[i].className = x;
+					oLi[i].checked = y;
+			}
+			this.checked = !this.checked;
+		}
+		// 反选 '
+		Uncheck.onclick = function () {
+			 var flag = true;
+			for (var i = 0; i < length; i++) {
+				if (oLi[i].checked) {
+					flag = false;
+                    break;
+				}
+			}
+
+			//判断在全选的时候不能反选 或 在 没有选的情况下反选
+			if (!( flag || choose.checked)) {
+				for (var i = 0; i < length; i++) {
+					 oI[i].className = [ oLi[i].checked ? ck : cked ]
+                	 oLi[i].checked = !oLi[i].checked;
+				}
+			} else {
+				alert('在全选的时候不能反选 或 在 没有选的情况下反选')
+			}
+		}
+	</script>
+</body>
+		<!-- 			// if (this.checked) {
+			// 	for (var i = 0; i < length; i++) {
+			// 		aI.className = ck;
+			// 		oI[i].className = ck;
+			// 		oLi[i].checked = false;
+			// 	}
+			// } else {
+			// 	for (var i = 0; i < length; i++) {
+			// 		aI.className = cked;
+			// 		oI[i].className = cked;
+			// 		oLi[i].checked = true;
+			// 	}   全选
+			// } -->
+</html>

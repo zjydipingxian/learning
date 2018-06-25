@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>动态新闻列表</title>
+    <link rel="stylesheet" type="text/css" href="css/new.css">
+</head>
+
+<body>
+    <div id="box">
+        <div class="msg">
+            <h2>最新动态</h2>
+            <div id="inp">
+                <input type="text" name="" id="addText">
+                <button id="Btn_Add">添加</button>
+            </div>
+            <span id="add">+</span>
+        </div>
+        <ul id="TextList">
+        	<!-- <li>12312</li> -->
+        </ul>
+    </div>
+
+
+    
+</body>
+	<script type="text/javascript">
+    	var oAdd = document.getElementById('add'),
+    		oBtn_Add = document.getElementById('Btn_Add'),
+    		oAddText = document.getElementById('addText'),
+    		oul = document.getElementById('TextList'),
+    		oInp = document.getElementById('inp');
+    	var off = false;
+
+
+    	oAdd.onclick = function(){
+           if (!off) {
+           	 oInp.style.display = 'block';
+           } else {
+           	 oInp.style.display = 'none';
+           }
+            off =!off;
+            oAddText.value = '';
+       	};
+
+       	oBtn_Add.onclick = function () {
+       		var val = oAddText.value;//先存起来
+       		if (val != '') {
+       			var oli = document.createElement('li');
+	       		oli.innerHTML = val;
+	       		oul.appendChild(oli);
+	       		oAddText.value = '';
+	       		oInp.style.display = 'none';
+	       		off =!off;
+       		} else {
+       			console.log('內容為空')
+       		}
+       		
+       		
+       	}
+
+
+    </script>
+</html>

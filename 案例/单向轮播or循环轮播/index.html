@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>单向轮播or循环轮播</title>
+    <link rel="stylesheet" type="text/css" href="css/banner.css">
+</head>
+
+<body>
+    <div id="box">
+        <ul class="banner">
+            <li class="on"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <p id="text"></p>
+        <div class="typeBanner">
+            <span class="on" id="Oneway">单向模式</span>
+            <span id="cycles">循环模式</span>
+        </div>
+        <div class="btn">
+            <span class="prev">&lt;</span>
+            <span class="next">&gt;</span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    var Oneway = document.getElementById('Oneway'), //单向
+        oCycles = document.getElementById('cycles'), //循环
+        oli = document.getElementsByTagName('li'),
+        oSpan = document.querySelectorAll('.btn span'),
+        text = document.getElementById('text'),
+        len = oli.length,
+        index = 0,
+        off = true;
+
+    var BannerColorArr = ['#FFB6C1', '#6A5ACD', '#E6E6FA', '#008080', '#3CB371'],
+    	TextArr = ['老铁们','点一波关注','从此不再','迷路','哈哈哈哈哈!'];
+
+    text.innerHTML =  TextArr[0];
+    	
+    for (var i = 0; i < len; i++) {
+        oli.i = i;
+        oli[oli.i].style.background = BannerColorArr[oli.i];
+        oli[oli.i].innerHTML = oli.i +1;
+    }
+
+    //单向模式
+    Oneway.onclick = function() {
+        oCycles.className = '';
+        Oneway.className = 'on';
+        off = true;
+    }
+
+    //循环模式
+    oCycles.onclick = function() {
+        oCycles.className = 'on';
+        Oneway.className = '';
+        off = false;
+    }
+
+    for (var i = 0; i < 2; i++) {
+        (function(i) {
+            oSpan[i].onclick = function() {
+                change(function() {
+                    if (i) {
+                    	index++;
+                    	if (index > len-1) {
+                    		index = off ? len-1 : 0;
+                    	}
+                    } else {
+                    	 index--;
+                    	 if (index < 0) {
+                    	 	index = off ? 0 : len-1;
+                    	 }
+                    }
+                    text.innerHTML =  TextArr[index];
+                });
+            }
+        })(i);
+    }
+
+
+    function change(cha) {
+        oli[index].className = '';
+        cha();
+        oli[index].className = 'on';
+    }
+    </script>
+</body>
+                   <!--  // if (off) {
+                    //     if (i) {
+                    //         index++;
+                    //         if (index > len - 1) {
+                    //             index = len - 1;
+                    //             alert('最后一张了,请老铁不要在继续点了');
+                    //         }
+                    //     } else {
+                    //         index--;
+                    //         if (index < 0) {
+                    //             index = 0;
+                    //             alert('第一张了,请老铁不要在继续点了');
+                    //         }
+                    //     }
+                    // } else {
+                    //     if (i) {
+                    //         index++;
+                    //         index %= len;
+                    //     } else {
+                    //         index--;
+                    //         if (index < 0) index = len - 1;
+                    //     }
+                    // } -->
+</html>

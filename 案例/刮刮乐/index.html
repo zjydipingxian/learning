@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>刮刮乐</title>
+	<style type="text/css">
+		*{
+			margin: 0;padding: 0;list-style: 0;text-decoration: none;
+		}
+		#box{
+			position: relative;
+			width: 600px;
+			height: 400px;
+			text-align: center;
+			background: red;
+			margin: 50px auto;
+		}
+		#box p {
+			line-height: 400px;
+			font-size: 50px;
+			font-weight: 500;
+			color: #fff;
+		}
+		#hover{
+			position: absolute;
+			top: 0;
+
+		}
+		#hover span{
+			position: absolute;
+			/*float: left;*/
+			background: #368;
+
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<p>谢谢参与刮刮乐</p>
+		<div id="hover"></div>
+		<script type="text/javascript">
+			var oHover = document.getElementById('hover'),
+			    aSpan = oHover.getElementsByTagName('span'),
+				row = 15,
+				low = 8,
+				length = row * low;
+			var SpanW = 600/row,
+				SpanH = 400/low;
+
+			for (var i = 0; i < row; i++) { //行
+				for (var e = 0; e < low; e++) { //一行多少个
+					var span = document.createElement('span');
+						span.style.width = SpanW + 'px';
+						span.style.height = SpanH + 'px';
+						span.style.top = e*SpanH + 'px';
+						span.style.left = i*SpanW + 'px';
+						oHover.appendChild(span);
+				}
+			}
+
+			var remoArr = [];
+			for (var i = 0; i < aSpan.length; i++) {
+				aSpan[i].bool = true;
+				aSpan[i].onmouseenter = function () {
+					if (this.bool) {
+						if (remoArr.push(this) > length/2) {
+							oHover.innerHTML ='';
+						}
+						this.parentNode && oHover.removeChild(this);
+						this.bool = false;
+					}
+					//oHover.removeChild(this);
+				}
+
+			}
+
+		</script>
+	</div>
+</body>
+</html>

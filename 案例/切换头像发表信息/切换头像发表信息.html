@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>切换头像发表信息</title>
+	<link rel="stylesheet" type="text/css" href="css/msg.css">
+</head>
+<body>
+	<div id="box">
+		<input type="text" name="text" class="input">
+		<div class="release">
+			<img src="images/1.jpg" class="img">
+			<button id="btn">发送</button>
+		</div>
+		<ul class="listText">
+			<!-- <li>
+				<img src="images/1.jpg" width="50" height="50">
+				<span>123</span>
+			</li> -->
+
+		</ul>
+	</div>
+	<script type="text/javascript">
+		var input = document.getElementsByClassName('input')[0],
+			release = document.getElementsByClassName('release')[0],
+			oImg = document.getElementsByClassName('img')[0],
+			oBtn = document.getElementById('btn'),
+			oImgArr=["images/1.jpg","images/2.jpg"],
+			len = oImgArr.length,
+			oUl = document.getElementsByClassName('listText')[0],
+			index = 0;
+
+
+		oImg.onclick = function () {
+			index++;
+			index%=len;
+			oImg.src = oImgArr[index];
+		}
+
+		input.onfocus = function () {
+			release.classList.add('on');
+		}
+		
+		oBtn.onclick = function () {
+			var TxtI = input.value;
+			var li = "<li><img src='"+ oImgArr[index] +"' />"+"<span>"+ TxtI +"</span>"+"</li>";
+			oUl.innerHTML += li;
+			input.value ="";
+			release.classList.remove('on');
+		}
+
+	</script>
+</body>
+</html>

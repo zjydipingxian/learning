@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font: 12/1.5 '微软雅黑';
+}
+
+#box {
+    width: 426px;
+    height: 104px;
+    margin: 50px auto;
+}
+
+#tab {
+    width: 100px;
+    height: 100%;
+    float: left;
+}
+
+#tab ul li {
+    width: 100px;
+    height: 50px;
+    margin-bottom: 1px;
+    background: #000;
+    font-size: 18px;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+}
+
+#tab ul li.on {
+    background: #f60;
+}
+
+#content {
+    position: relative;
+    width: 326px;
+    height: 203px;
+    float: right;
+}
+
+#content .pic {
+    display: none;
+}
+
+#content .pic.on {
+    display: block;
+}
+
+#content .pic ul li {
+    display: none;
+    width: 100%;
+    height: 203px;
+}
+
+#content .pic ul li.on {
+    display: block;
+}
+
+#content .btn {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 35px;
+    width: 100%;
+    background: rgba(0, 0, 0, .5);
+}
+
+#content .btn.on {
+    display: block;
+}
+
+#content .btn ul {
+    float: right;
+}
+
+#content .btn ul li {
+    float: left;
+    width: 35px;
+    height: 35px;
+    background: #ddd;
+    text-align: center;
+    line-height: 35px;
+    margin-left: 2px;
+}
+
+#content .btn ul li.on {
+    background: #f60;
+    width: 120px;
+}

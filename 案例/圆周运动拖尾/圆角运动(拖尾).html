@@ -1,0 +1,94 @@
+js<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>圆角运动</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;list-style: none;text-decoration: none;}
+		body{background: #222;}
+		#box{position: relative;width: 500px;height: 500px;border-radius: 50%;margin: 100px auto;}
+		.ball{z-index:999;position: absolute;top:-5px;left:190px;width:80px;height: 80px;border-radius: 50%;background: url(images/1.gif) no-repeat center/cover}
+		.BallT span{position: absolute;top:-25px;left:190px;width:80px;height: 80px;border-radius: 50%; line-height:80px;text-align: center;color:#fff; font-size: 15px;}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div class="ball"></div>
+		<div class="BallT">
+			<!-- <span>1</span> -->
+		</div>
+	</div>
+	<script type="text/javascript">
+		var box=document.getElementById('box');
+		var ball=document.getElementsByClassName('ball')[0];  //小球
+		var BallT=document.getElementsByClassName('BallT')[0];
+		var start = Math.PI/2; //角度
+ 		var r=parseFloat(getCss(box).width)/2; // R
+ 		var ballR=parseFloat(getCss(ball).width)/2; // R
+ 		var Timer=0;
+ 		var count=0;
+		setInterval(function () {
+			start-=0.01;
+			var x=Math.cos(start)*r;
+			var y=Math.sin(start)*r;
+			
+			var left=x+r-ballR;
+			var top=r-y-ballR;
+			ball.style.left = left+'px';
+			ball.style.top = top+'px';
+			_shadow(left, top,count);
+			count++;
+			
+		},1000/60)
+
+		/**
+		 创建节点
+		 */
+		function _shadow(x,y,count) {
+			var text=RGBcolor();
+			var t=text.split('rgb',)[1];  //切割
+			if (count%50===0) {
+				var ospan=document.createElement('span');
+					ospan.style.left = x+"px";
+	            	ospan.style.top = y+"px";
+	            	ospan.style.backgroundColor = text;
+	            	ospan.innerHTML = text;
+	            	var oPid = 'aa'
+           			ospan.id = oPid;
+					BallT.appendChild(ospan);
+					setTimeout(_removeChild,3000,oPid);
+			}
+		}
+
+		// 删除节点
+		function _removeChild(oPid){
+			var newChild=document.getElementById(oPid);
+			BallT.removeChild(newChild);
+		}
+
+
+
+		/**
+			样式获取
+		 */
+		function  getCss(obj){
+			return obj.currentStyle || getComputedStyle(obj);
+		}
+
+		/**
+		 * [RGBcolor description] //随机rgb值
+		 */
+		function RGBcolor(){ 
+          //   var r = Math.floor(Math.random()*256),
+          //       g = Math.floor(Math.random()*256),
+          //       b = Math.floor(Math.random()*256);
+          //       a =	Math.floor(Math.random()*10)*0.1;
+	         //    //return "rgba("+r+","+g+","+b+","+a+")";
+	         // return "rgb("+r+","+g+","+b+")";
+	       
+	        return '#'+(Math.random()*0xffffff<<0).toString(16); 
+        }
+	</script>
+	
+</body>
+</html>

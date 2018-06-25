@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>面向对象-轮播</title>
+    <link rel="stylesheet" type="text/css" href="css/banner.css">
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-decoration: none;
+    }
+
+    #wrap {
+        position: relative;
+        width: 738px;
+        height: 300px;
+        margin: 50px auto;
+    }
+
+    #wrap ul.pic {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    #wrap ul.pic li {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        font-size: 50px;
+        color: #fff;
+        line-height: 300px;
+    }
+
+    #wrap ul.pic li.on {
+        display: block;
+    }
+
+    .tab {
+        position: absolute;
+        left: 50%;
+        bottom: 20px;
+        width: 125px;
+        height: 21px;
+        margin-left: -68px;
+        background: rgba(255, 255, 255, .5);
+        border-radius: 10px;
+    }
+
+    .tab ul li {
+        float: left;
+        width: 15px;
+        height: 15px;
+        margin: 3px 5px;
+        background: #fff;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .tab ul li.on {
+        background: blue;
+    }
+
+
+
+    #box {
+        position: relative;
+        width: 310px;
+        height: 180px;
+        margin: 0 auto;
+    }
+
+    #box .pic,
+    #box .pic ul {
+        width: 100%;
+        height: 100%;
+    }
+
+    #box .pic ul {
+        position: relative;
+    }
+
+    #box .pic ul li {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        font-size: 30px;
+        line-height: 180px;
+    }
+
+    #box .pic ul li.on {
+        display: block;
+    }
+
+    #box .btn {
+        position: absolute;
+        top: 50%;
+        width: 25px;
+        height: 50px;
+        margin-top: -25px;
+        text-align: center;
+        line-height: 50px;
+        font-weight: bold;
+        color: #fff;
+        background: rgba(0, 0, 0, .5);
+        cursor: pointer;
+    }
+
+    #box .next {
+        right: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <ul class="pic">
+            <li style="background: red">1</li>
+            <li style="background: #368">2</li>
+            <li style="background: #f60">3</li>
+            <li style="background: #000">4</li>
+            <li style="background: #777">5</li>
+        </ul>
+        <div class="tab">
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <!--模块二-->
+    <div id="box">
+        <div class="pic">
+            <ul>
+                <li style="background: red">1</li>
+                <li style="background: #368">2</li>
+                <li style="background: #f60">3</li>
+                <li style="background: #000">4</li>
+                <li style="background: #777">5</li>
+            </ul>
+        </div>
+        <div class="tab">
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="btn prev">&lt;</div>
+        <div class="btn next">&gt;</div>
+    </div>
+</body>
+	<script type="text/javascript">
+	(function() {
+	    //父亲
+	    function Banner() {
+	        this.Pli = arguments[0];
+	        this.Tli = arguments[1];
+	        this.length = this.Tli.length;
+	        this.index = 0;
+	        this.init();
+	        this.tab();
+	    }
+
+	    //原型
+	    Banner.prototype = {
+	        //初始化函数
+	        init: function() {
+	            this.Pli[0].className = "on";
+	            this.Tli[0].className = "on";
+	        },
+	        change: function(fn) {
+	            this.Pli[this.index].className = '';
+	            this.Tli[this.index].className = '';
+	            fn();
+	            this.Pli[this.index].className = 'on';
+	            this.Tli[this.index].className = 'on';
+	        },
+	        tab: function() {
+	            var This = this;
+	            for (var i = 0; i < this.length; i++) {
+	                this.Tli[i].i = i;
+	                this.Tli[i].onclick = function() {
+	                    var goudan = this.i;
+	                    This.change(function() {
+	                        This.index = goudan
+	                    })
+	                }
+	            }
+	        }
+	    };
+
+
+	    //模块2
+
+	    function Box() {
+	        Banner.apply(this, [].slice.call(arguments));
+	        this.bLi = arguments[2];
+	        console.log(this.bLi)
+	        this.timer = null;
+	        this.box = arguments[3];
+	        this.btnClick();
+	        this.auto();
+	    }
+
+	    function Fn() {}
+	    Fn.prototype = Banner.prototype;
+	    Box.prototype = new Fn();
+
+	    Box.prototype.btnClick = function() {
+	        var This = this;
+	        for (var i = 0; i < 2; i++) {
+	            this.bLi[i].i = i;
+	            this.bLi[i].onclick = function() {
+	                var goudan = this.i; //存当前点击的按钮的序号
+	                This.change(function() {
+	                    if (goudan) {
+	                        This.index++;
+	                        This.index %= This.length;
+	                    } else {
+	                        This.index--;
+	                        if (This.index < 0) { This.index = This.length - 1 }
+	                    }
+	                })
+	            }
+	        }
+	    };
+
+	    //自动轮播
+	    Box.prototype.auto = function() {
+	        var This = this;
+	        this.timer = setInterval(function() {
+	            This.change(function() {
+	                This.index++;
+	                This.index %= This.length;
+	            })
+	        }, 1000);
+	        this.box.onmouseenter = function() {
+	            clearInterval(This.timer)
+	        };
+	        this.box.onmouseleave = function() {
+	            This.auto()
+	        }
+	    };
+
+
+	    //实例化
+	    (function() {
+	        var oWrap = document.getElementById("wrap"),
+	            aPicLi = oWrap.querySelectorAll(".pic li"),
+	            aTabLi = oWrap.querySelectorAll(".tab li");
+	        new Banner(aPicLi, aTabLi);
+	    })();
+
+
+	    (function() {
+	        var oBox = document.getElementById("box"),
+	            aPicLi = oBox.querySelectorAll(".pic li"),
+	            aTabLi = oBox.querySelectorAll(".tab li"),
+	            aBtnLi = oBox.querySelectorAll(".btn");
+	        new Box(aPicLi, aTabLi, aBtnLi, oBox);
+	    })();
+
+	})()
+	</script>
+
+</html>

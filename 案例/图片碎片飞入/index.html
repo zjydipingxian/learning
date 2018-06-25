@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>图片碎片飞入</title>
+	<link rel="stylesheet" href="css/pic.css">
+</head>
+<body>
+	<div id="box"></div>
+	<!-- 运动框架 -->
+	<script type="text/javascript" src="js/move.js"></script>
+	<script type="text/javascript">
+		(function() {
+			var oBox = document.getElementById('box'),
+				row = 15, //一行多少个
+				cow = 15, // 竖直多个
+				SpanW = parseFloat( getCss(oBox).width ) / row,// 一个盒子的宽度
+				SpanH = parseFloat( getCss(oBox).height ) / cow;// 一个盒子的宽度
+				number = row * cow,
+				arrAttr = [], // 存放终点位置
+                str = '';
+            for (var i = 0; i < number; i++) {
+            	var spanX=  i% row,
+                    spanY = Math.floor( i/ row );
+                str += '<span style="width: '+ SpanW + 'px;height:'+ SpanH +'px;top: '+(-100)+'px;left: '+(-100)+'px;' +
+                        'background-position: '+(-(spanX * SpanW))+'px '+(-(spanY * SpanH))+'px"></span>';
+
+                arrAttr[i] = {
+                        top: spanY * SpanH,
+                        left: spanX * SpanW
+                    }            
+            }
+            // console.log(arrAttr)
+          	oBox.innerHTML = str;
+
+          	var aSpan = oBox.getElementsByTagName('span');
+          		// spanArr = [];
+            // spanArr = [].slice.call( aSpan );
+            console.log(aSpan);
+
+
+            (function movement() {
+            	var len = arrAttr.length,
+                    index = Math.floor( Math.random() * len );
+                if( len === 0 ){
+                        oBox.classList.add( 'on' );
+                        cancelAnimationFrame(movement);
+                        return;
+                    }
+                  move( aSpan[index] ,{
+	                  	left : arrAttr[index].left,
+	                  	top : arrAttr[index].top,
+	                  	opacity : 1
+                  }, 2);
+                    requestAnimationFrame( movement );        
+            })();
+
+			function getCss(obj) {
+        		return window.getComputedStyle ? getComputedStyle(obj): obj.currentStyle;
+    		}	
+		})()
+	</script>
+</body>
+</html>

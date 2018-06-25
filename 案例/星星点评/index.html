@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>星星点评</title>
+		<meta name="Keywords" content="关键词,关键词">
+		<meta name="description" content="">
+		<link rel="stylesheet" type="text/css" href="css/star.css"/>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="box">
+				<h2>星星评分</h2>
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+				<p></p>
+			</div>
+		</div>
+	</body>
+	<script>
+		  var ali=document.getElementsByTagName("li");
+		  var ap=document.getElementsByTagName("p")[0];
+		  var  TextArr=['请对我们的商品评分','1分－差的太离谱','2分－部分有破损','3分－质量一般','4分－质量不错','5分－质量非常好']
+		  ap.innerText = TextArr[0];
+		  var onoff = -1;
+		  for(var i=0;i<ali.length;i++){
+		  	ali[i].index=i;
+		  	ali[i].onmousemove=function(){
+		  		ap.innerHTML=TextArr[this.index];
+		  		/*for(i=0;i<ali.length;i++){
+		  			ali[i].className="";
+		  		}*/
+		  		fu(this.index);
+		  	}
+		  	ali[i].onmouseout=function(){
+		  		ap.innerHTML='请对我们的商品评分';
+		  		/*for(i=0;i<ali.length;i++){
+		  			ali[i].className="";
+		  		}*/
+		  		fu(onoff);
+		  	}
+			ali[i].onclick=function(){
+				onoff = this.index;
+				fu(onoff);
+			}
+			function fu(index){
+				for(i=0;i<ali.length;i++){
+		  			ali[i].className="";
+		  		}
+		  		for(i=0;i<=index;i++){
+		  			ali[i].className="on";
+		  			ap.innerHTML=TextArr[index+1];
+		  		}
+			}
+		 }
+	</script>
+</html>
