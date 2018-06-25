@@ -1,7 +1,10 @@
 ## 欢迎各位大佬来我我简单的GitHub
 
-You can use the [editor on GitHub](https://github.com/zjydipingxian/learning/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
-
+这GitHub包含了三个文件夹，案例、大型项目、和初学入门的微信小程序实例
+  案例文件主要内容：是学习原生JS的内容小Demo，固定对JS的认识，
+  大型项目文件主要内容：是对一些大型网站的页面模仿和实现特效，引用了jquery，也帮助对jquery Api的熟悉和运用
+  微信小程序文件：通过知乎，CSDN论坛找到的一些案例，通过学习他们的案例，掌握官网文档的api以及组件的运用
+  
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
 ### Markdown
