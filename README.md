@@ -6,6 +6,11 @@
   微信小程序文件：通过知乎，CSDN论坛找到的一些案例，通过学习他们的案例，掌握官网文档的api以及组件的运用
   
   
-  
+  ##如何查看本GitHub文件里面的页面效果
+   
+   
+   如案例中有：特效banner图 <br />
+      https://zjydipingxian.github.io/learning/案例/特效banner图/螺旋banner.html
+      
   
   
