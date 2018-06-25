@@ -10,7 +10,11 @@
    
    
    如案例中有：特效banner图 <br />
-      https://zjydipingxian.github.io/learning/案例/特效banner图/螺旋banner.html
+      https://zjydipingxian.github.io/learning/案例/特效banner图/螺旋banner.html  <br />
+      
+      
+   如大型项目中有：天猫实战 <br />
+       https://zjydipingxian.github.io/learning/大型项目/天猫实战/index.html  <br />
       
   
   
