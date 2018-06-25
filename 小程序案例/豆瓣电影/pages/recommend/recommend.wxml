@@ -1,0 +1,11 @@
+<!--pages/recommend/recommend.wxml-->
+<view class='content'>
+  <import src="/pages/template/template.wxml" />
+  <template is="movies" data="{{movies}}" />
+
+  <view class="body-view">
+    <loading hidden="{{hidden}}" bindchange="loadingChange">
+      加载中...
+    </loading>
+  </view>
+</view>

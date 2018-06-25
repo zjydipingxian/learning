@@ -1,0 +1,24 @@
+<!--pages/movie/movie.wxml-->
+<view class='content'>
+  <!-- 轮播图 -->
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{imgUrls}}" wx:key="this">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" mode="widthFix" style='width:100%;hegith:100%' />
+      </swiper-item>
+    </block>
+  </swiper>
+
+
+  <!-- 热映列表 -->
+  <import src="/pages/template/template.wxml"/>
+  <template is="movies" data="{{movies}}"/>
+
+
+  <view class="body-view">
+    <loading hidden="{{hidden}}" bindchange="loadingChange">
+      加载中...
+    </loading>
+  </view>
+
+</view>

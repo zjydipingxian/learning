@@ -1,0 +1,43 @@
+<!--pages/movies/movie-yr/-movie-yr.wxml-->
+<view class='container'>
+  <text class='title'>{{movie.name}} {{movie.name_en}}</text>
+  <view class='yrMgs'>
+    <view class='img'>
+      <image src='{{movie.yrUrl}}' mode="widthFix"></image>
+    </view>
+    <view class='msg'>
+      <view class="flex-row">
+        <text class="gender">性别:</text>
+        <text>{{movie.gender}}</text>
+      </view>
+       <view class="flex-row">
+        <text class="constellation">星座:</text>
+        <text>{{movie.constellation}}</text>
+      </view>
+      <view class="flex-row">
+        <text class="birthday">出生日期:</text>
+        <text>{{movie.birthday}}</text>
+      </view>
+      <view class="flex-row">
+        <text class="born_place">出生地:</text>
+        <text>{{movie.born_place}}</text>
+      </view>
+      <view class="flex-row">
+        <text class="professions">职业:</text>
+        <text>{{movie.professions}}</text>
+      </view>
+      <view class="flex-row">
+        <text class="aka_en">更多外文名:</text>
+        <text>{{movie.aka_en}}</text>
+      </view>
+      <view class="flex-row">
+        <text class="aka">更多中文名:</text>
+        <text>{{movie.aka}}</text>
+      </view>
+    </view>
+  </view>
+  <view class='synopsis'>
+    <text class='synopsis-font'>影人简介  · · · · · ·</text>
+    <text class='summary-content'>{{movie.summary}}</text>
+  </view>
+</view>

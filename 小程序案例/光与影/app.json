@@ -1,0 +1,17 @@
+{
+  "pages":[
+    
+    "pages/movies/movies",
+    "pages/movies/more-movie/more-movie",
+    "pages/movies/movie-detail/movie-detail",
+    "pages/movies/movie-yr/movie-yr"
+  ],
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#405f80",
+    "navigationBarTitleText": "光与影",
+    "navigationBarTextStyle":"white"
+    
+  }
+  
+}

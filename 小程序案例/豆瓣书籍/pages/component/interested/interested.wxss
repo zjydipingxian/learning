@@ -1,0 +1,82 @@
+/**感兴趣**/
+
+.wrapper-content {
+  background: #fff;
+  padding: 30rpx;
+}
+
+.ibox-top {
+  padding: 20rpx 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ibox-title {
+  font-size: 30rpx;
+  color: #2d2d2d;
+  text-overflow: ellipsis;
+}
+
+.ibox-refresh {
+  font-size: 30rpx;
+  color: #989898;
+}
+
+.list-container {
+  padding: 20rpx 0 0;
+  width: 690rpx;
+  overflow: hidden;
+}
+
+.list-container view::after {
+  clear: both;
+  content: '.';
+  display: block;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+.list-ui {
+  width: 732rpx;
+}
+
+.list-ui .list-nav {
+  width: 202rpx;
+  float: left;
+  margin-bottom: 50rpx;
+  margin-right: 42rpx;
+}
+
+.book-item {
+  width: 202rpx;
+}
+
+.book-item-img {
+  width: 202rpx;
+  height: 282rpx;
+}
+
+.book-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 10rpx 0 6rpx;
+}
+
+.average-rating {
+  font-size: 26rpx;
+  color: #989898;
+}
+
+.star-img {
+  width: 130rpx;
+  height: 24rpx;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin-right: 5rpx;
+}

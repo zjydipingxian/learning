@@ -1,0 +1,59 @@
+/* pages/movies/movie-yr/-movie-yr.wxss */
+
+page {
+  background: #eee9e9;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 30rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 50rpx;
+  color: #222;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 30rpx;
+}
+
+image {
+  border: 5px solid #fff;
+  margin-left: 10rpx;
+  margin-bottom: 30rpx;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10rpx;
+  margin-left: 10rpx;
+  flex-wrap: wrap;
+}
+
+.gender, .constellation, .birthday, .born_place, .professions, .aka_en, .aka {
+  display: inline-block;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.synopsis {
+  margin-left: 30rpx;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50rpx;
+}
+
+.synopsis-font {
+  color: #f60;
+}
+
+.summary-content {
+  margin-top: 20rpx;
+  margin-right: 40rpx;
+  line-height: 40rpx;
+  letter-spacing: 1px;
+}

@@ -1,0 +1,25 @@
+<!--pages/detail/detail.wxml-->
+<view class='content'>
+  <view class='box'>
+    <image src="{{movie.images.large}}" class='img'></image>
+    <view class='title'>{{movie.tt}}</view>
+  </view>
+  <text class='text'>{{movie.text1}}</text>
+  <text class='Txt'>剧情简介：\n{{movie.summary}}</text>
+
+
+  <view class="section">
+    <view class="section__title">主演列表</view>
+    <scroll-view scroll-x style="width:100%;hegith:100%;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll"  scroll-top="{{scrollTop}}">
+    <view class='casts'>
+       <block wx:for="{{movie.casts}}" wx:key="this">
+        <view class='ImgUrl'>
+            <image src="{{item.avatars.medium}}" mode="aspectFit"></image>
+        </view>
+      </block>
+    </view>
+    </scroll-view>
+  </view>
+
+
+</view>
