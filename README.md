@@ -5,7 +5,9 @@
   大型项目文件主要内容：是对一些大型网站的页面模仿和实现特效，引用了jquery，也帮助对jquery Api的熟悉和运用
   微信小程序文件：通过知乎，CSDN论坛找到的一些案例，通过学习他们的案例，掌握官网文档的api以及组件的运用
   
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+  
+ 
+ 
 
 ### Markdown
 
