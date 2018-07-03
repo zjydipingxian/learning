@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/write.css">
+    <link rel="stylesheet"href="../editor/css/editormd.css" />
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+    <title>写文章</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header_nav"></div>   
+        <section>
+            <div class="top">
+                <span class="span-label">文章标题</span><input class="input-title" type="text" placeholder="请输入文章标题">
+                <span class="span-label span-none">所属分类</span>
+                <input readonly class="input-select input-select-first" placeholder="请选择类别"><span class="icon"></span>
+                <span class="span-label span-none">技术分类</span>
+                <input readonly class="input-select input-select-second" placeholder="请选择类别"><span class="icon"></span>
+                <div class="list-left">
+                    <p class="p-first">经验分享</p>
+                    <p>入门学习</p>
+                    <p>成果分享</p>
+                </div>
+                <div class="list-right">
+                    <p class="p-first">HTML</p>
+                    <p>PHP</p>
+                    <p>JAVA</p>
+                </div>
+            </div>
+            <div class="main">
+                    <div id="test-editormd">
+                            <textarea class="editormd-markdown-textarea" name="$id-markdown-doc"></textarea>
+                            <!-- html textarea 需要开启配置项 saveHTMLToTextarea == true -->
+                            <textarea class="editormd-html-textarea" name="$id-html-code"></textarea>
+                        </div>
+                <input class="submit" type="button" value="发布">
+            </div>
+        </section>
+        <div class="tips">
+            <div class="tips_red">×</div><div class="error"></div>
+        </div>
+    </div>
+    <script src="../editor/examples/js/jquery.min.js"></script>
+    <script src="../editor/editormd.min.js"></script>
+    <script src="../js/write.js"></script>
+
+</body>
+</html>

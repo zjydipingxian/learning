@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/register.css">
+    <title>注册</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header_nav"></div>
+        <div id="main">
+            <form id="login"  method="POST">
+                <div class="for_underline">
+                    <p>欢迎回到猿计划</p>
+                </div>
+                <div class="for_input">
+                    <input id="mobile" placeholder="请输入手机号" />
+                </div>
+                <div class="for_input">
+                    <input id="pwd" type="password" placeholder="请输入6位以上密码" />
+                </div>
+                <div class="for_input">
+                    <input id="pwd_copy" type="password" placeholder="请确认密码" />
+                </div>
+                <div class="for_message">
+                    <input id="message"  placeholder="请输入短信验证码" />
+                    <input id="mes" type="button" value="获取验证码" />
+                </div>
+                <div class="for_button">
+                    <input id="sub" type="button" value="登录" />
+                </div>
+            </form>
+        </div>
+        <div class="tips">
+            <div class="tips_red">×</div><div class="error"></div>
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="../js/register.js"></script>
+</body>
+</html>

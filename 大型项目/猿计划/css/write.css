@@ -1,0 +1,328 @@
+*{
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+}
+/* 滚动条的影响，不存在的 */
+html {
+    overflow-y: scroll; /* for IE8 */
+}
+:root {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+:root body {
+    position: absolute;
+}
+body {
+    width: 100vw;
+    overflow: hidden;
+} 
+input::-webkit-input-placeholder{
+    color:rgb(191,203,217) ;
+}
+input::-moz-placeholder{  
+    color:rgb(191,203,217) ;
+}
+input:-moz-placeholder{    
+    color:rgb(191,203,217) ;
+}
+input:-ms-input-placeholder{ 
+    color:rgb(191,203,217) ;
+}
+#wrapper .now{
+    color: rgb(234,15,45);
+}
+header{
+    position: relative;
+    border-top: 1px solid;
+    border-bottom: 1px solid rgb(213, 213, 213);
+    background-color: rgb(250, 250, 250);
+    box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+}
+header::after{
+    clear: both;
+    display: block;
+    content: "";
+}
+nav a{   
+    display:table-cell; 
+    padding:1em 0.4em; 
+    vertical-align: middle;
+    text-decoration: none!important;
+    cursor: pointer;
+}
+header .underline{
+    margin-top: -5px;
+    border-top:3px solid rgb(235,23,52);
+    height: 0;
+    display: none;
+}
+nav a:link{color: black;}
+nav a:visited{color: black;}
+nav a:hover +.underline{display: block;}
+header .wrap{   
+    width: 75%;
+    margin: 0 auto;
+} 
+header .left{  
+    position: relative;
+    line-height: 0;
+    width: 45%;
+    float: left;
+}
+header span{
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.6em;
+    font-weight: 800;
+}
+header img{   
+    cursor: pointer;
+    width:70px;
+    height:auto;
+}
+nav,ul{
+    float: left;
+}
+nav ul li{  
+    border-right: 2em solid transparent;
+    list-style: none;
+    float: left;
+}
+#person{
+    cursor: pointer;
+    position: absolute;
+    right: 10%;
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    border: 1px solid rgb(220,220,220);
+    box-shadow: -2px 2px 5px rgba(0,0,0,0.2);
+}
+#person #pic{
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+}
+#person:hover ul{
+    display: inline;
+}
+#person ul{
+    z-index: 101;
+    box-shadow: -5px 5px 10px rgba(0,0,0,0.2);
+    display: none;
+    position: absolute;
+    top:102%;
+    left: -30%;
+}
+#person ul li{  
+    box-sizing: content-box;
+    z-index: 101;
+    text-align: center ;
+    background-color: rgb(250,250,250);
+    border-bottom:1px solid rgb(220,220,220);
+    padding: 0.5em 0 0.5em 0;
+    width:100px;
+    height: 25px;
+    list-style-type: none;
+}
+#person a{  
+    color: black; 
+    text-decoration: none;
+    cursor: pointer;
+}
+#person a:hover{
+    color: rgb(235,23,52);
+}
+/* 主体部分 */
+section{
+    width:80%;
+    margin: 0 auto;
+}
+section .top{
+    overflow: hidden;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+section .top .span-label{
+    display: inline-block;
+    padding-right: 0.5%;
+    font-size: 0.9em;
+}
+section .top .type,section .top span:first-child{
+    margin-left: 5%;
+}
+section .top input{
+    font-size: 0.8em;
+    border: 1px solid rgb(191,203,217);
+    vertical-align: middle;
+    padding-top: 0.8%;
+    padding-left: 1%;
+    padding-bottom: 0.8%;
+    border-radius: 7px;
+    outline: none;
+}
+section .top .input-title{width: 30%; margin-right: 5%;}
+section .top .input-select{width: 15%; cursor: pointer; position: relative;}
+section .top input:hover{
+    border: 1px solid rgb(131,145,165);
+}
+section .top input:focus{
+    border: 1px solid rgb(32,160,255);
+}
+section .top .icon{
+    position: relative;
+    vertical-align: middle;
+    transform: rotate(0deg);
+    transform-origin: 50% 30%;
+    transition: all 0.5s;
+    right: 2%;
+    display: inline-block;
+    border: 7px solid transparent;
+    border-top:7px solid rgb(191,203,217);
+}
+section .top .input-select:focus +.icon{
+    transform: rotate(180deg);
+    transition: all 0.5s;
+}
+section .top .list-left,section .top .list-right{
+    background-color: #fff;
+    z-index: 100;
+    display: none;
+    position: absolute;
+    border-radius: 5px;
+    box-shadow: -1px 1px 10px rgba(0,0,0,0.2);
+    width: 13%;
+    border: 1px solid rgb(209,219,229);
+    margin-top: 2px;
+}
+section .top .list-left{ left: 52.9%;}
+section .top .list-right{ left: 72.3%;}
+section .top p{
+    height: 30px;
+    padding-left: 5%;
+    line-height: 30px;
+    cursor: pointer;
+    font-size: 0.8em;
+    height: 30px;
+}
+section .top p:hover{  background-color: rgb(228,232,241);}
+section .top p:first-child{margin-top: 5%;}
+section .top p:last-child{margin-bottom: 5%;}
+section .top .li-first{ padding-top: 20%;}
+section .main input{
+    margin-left:85%;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+    background-color: rgb(247, 49, 76);
+    border: none;
+    border-radius: 5px;
+    width: 100px;
+    height: 40px;
+}
+section .main input:active{
+    background-color: rgb(199, 5, 31);
+}
+.CodeMirror {
+    height:800px;
+}
+.tips{
+    width: 360px;
+    height: 40px;
+    position: fixed;
+    top:-40px;
+    transition: all 0.5s;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.tips .tips_red{
+    color: #fff;
+    line-height: 40px;
+    text-align: center;
+    font-size: 1.2em;
+    float: left;
+    height: 40px;
+    width: 40px;
+    background-color: rgb(242, 14, 51);
+}
+.tips .error{   
+    color: #C7C7CD;
+    padding-left: 10px;
+    line-height: 40px;
+    float: left;
+    width: 300px;
+    height: 40px;
+    background-color: #fff;
+}
+@media screen and (max-width: 1400px){
+    header .wrap{   
+        width: 80%;
+    }     
+}
+@media screen and (max-width: 1300px){
+    header .wrap{   
+        width: 80%;
+    } 
+    header .left{  
+        width: 35%;
+    }
+}
+@media screen and (max-width: 1200px){
+    header .wrap{   
+        width: 90%;
+    } 
+    header .left{  
+        width: 25%;
+    }
+}
+@media screen and (max-width: 1000px){
+    header .wrap{   
+        width: 90%;
+    } 
+    header .left{  
+        width: 60%;
+    }
+    header{
+        position: relative;
+    }
+    nav{
+        cursor: pointer;
+        position: absolute;
+        top:50%;
+        left: 65%;
+        transform: translateY(-50%);
+        float: right;
+        width: 40px;
+        height: 40px;
+        border: solid 1px #aaa;
+        background:url(https://s1.ax1x.com/2018/05/05/CNrOvd.png) no-repeat 50% 50%;
+        background-size: 40% 40%;
+    }
+    nav:hover>ul{
+        display: block;
+    }
+    nav ul{
+        display: none;
+        float: none;
+    }
+    nav ul li:first-child{
+        margin-top: 55px;
+    }
+    nav ul li{ 
+        margin-left: -1px;
+        width: 56px;
+        list-style: none;
+        float: none;
+    }
+    nav a{  
+        width: 56px;
+        background-color:  #aaa;
+        font-size: 0.6em;
+        text-align: center;
+    }
+    nav a:hover +.underline{display: none;}
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+    <style>
+        .bfc{
+            overflow: hidden;
+            width: 400px;
+        }
+        .box{
+            background-color: antiquewhite;
+            text-align: center;
+            padding-bottom: 50%;
+            position: relative;
+            border:1px solid;      
+        }
+        .raidal{
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            border:1px solid;
+            position: absolute;
+            border-radius: 50%;
+            background-color: #fff;
+        }
+        .raidal-top{
+            left: -20px;            
+            top: -20px;
+        }
+        .raidal-right{
+            right: -20px;
+            top: -20px;
+        }
+        .raidal-bottom{
+            right: -20px;
+            bottom: -20px;
+        }
+        .raidal-left{
+            left: -20px;
+            bottom: -20px;
+        }
+    </style>
+<body>
+    <div class="bfc">
+        <div class="box">
+            <span class='raidal raidal-top'></span>
+            <span class='raidal raidal-right'></span>
+            <span class='raidal raidal-bottom'></span>
+            <span class='raidal raidal-left'></span>
+            <p>正文标题</p>
+        </div>
+    </div>
+    <script src="tt.js"></script>
+    <script src="t.js"></script>
+    <script>
+    var ul = document.getElementsByClassName('raidal')
+    // for(var i = 0 ; i < ul.length ;i++){
+    //     ul[i].onclick = (function(index){
+    //         return function(){
+    //             console.log(index)
+    //         }
+    //     })(i);
+    // }
+
+    // for(var i = 0 ; i < ul.length ;i++){
+    //     (function(index){
+    //         ul[index].onclick = function(){
+    //             console.log(index)
+    //         }
+    //     })(i);
+    // }
+
+    for(let i = 0 ; i < ul.length ;i++){
+        ul[i].onclick = function(){
+            console.log(i)
+        }
+    }
+    
+    //     aaaa=()=>{
+    //         console.log(this.a)
+    //     }
+    //     obj = {
+    //         a:1,
+    //         f:aaaa()
+    //     }
+    //    obj2 = {
+    //         a:2,
+    //         f:aaaa
+    //     }
+    //    obj2.f();
+    </script>
+</body>
+</html>

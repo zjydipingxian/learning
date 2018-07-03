@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/article.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <title>文章</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header_nav"></div>   
+        <section>
+            <div class="article-table">
+                <div class="top">
+                    <span class="top-color top-color-a"></span><span class="top-list top-list-on top-list-a">所有分类</span>
+                    <span class="top-color top-color-b"></span><span class="top-list top-list-b">经验分享</span>
+                    <span class="top-color top-color-c"></span><span class="top-list top-list-c">入门学习</span>
+                    <span class="top-color top-color-d"></span><span class="top-list top-list-d">成果分享</span>
+                </div>
+                <div class="article-type">
+                    <!--幽灵空白节点，不能换行写--> <span class="article-type-new article-type-on">最新</span><span class="article-type-hot">热门</span> 
+                </div>
+                <div class="article-new">
+                    <div class="article-a">
+                        <div class="articles article-aa"></div><div class="page" id="pageid-a"></div> 
+                    </div>    
+                    <div class="article-b article-none">             
+                        <div class="articles  article-bb"></div><div class="page" id="pageid-b"></div>
+                     </div>  
+                    <div class="article-c article-none">
+                        <div class="articles  article-cc"></div><div class="page" id="pageid-c"></div>
+                    </div>  
+                    <div class="article-d article-none">
+                        <div class="articles   article-dd"></div><div class="page" id="pageid-d"></div>
+                    </div>
+                </div>
+                <div class="article-hot article-none">
+                    <div class="article-a">
+                        <div class="articles article-aaa"></div><div class="page" id="pageid-aa"></div> 
+                    </div>    
+                        <div class="article-b article-none">             
+                        <div class="articles article-bbb"></div><div class="page" id="pageid-bb"></div>
+                    </div>  
+                    <div class="article-c article-none">
+                        <div class="articles article-ccc"></div><div class="page" id="pageid-cc"></div>
+                    </div>  
+                    <div class="article-d article-none">
+                        <div class="articles article-ddd"></div><div class="page" id="pageid-dd"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="article-content">
+                <div class="topic">
+                    <h2></h2>
+                    <p class="tip">
+                        <span class="date"></span>
+                        <span class="time"></span>
+                        <span class="browser"></span>
+                        <span class="comment"></span>
+                    </p>
+                    <div class="topic-content"></div>
+                </div>
+                <div class="comments">
+                    <div class="buttons">
+                        <div class="good"><i class="fa fa-star-o" aria-hidden="true"></i><span>收藏</span></div>
+                        <div class="like"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i><span>赞</span></div>
+                    </div>
+                    <div>
+                        <textarea name="" placeholder="法治社会，文明发言。" rows="3" ></textarea>
+                    </div>
+                    <div class="clear">
+                        <input class="btn-submit" type="button" value="发表">
+                    </div>
+                </div>
+                <div class="comment-lists">
+                </div>
+                <div class="btn-more">
+                    <input type="button" value="加载更多">
+                </div>
+            </div>
+        </section>
+        <div class="tips">
+            <div class="tips_red">×</div><div class="error"></div>
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap-paginator.js"></script>
+    <script src="../js/article.js"></script>
+</body>
+</html>

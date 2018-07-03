@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/login.css">
+    <title>登录</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header_nav"></div>
+        <div id="main">
+            <form id="login"  method="POST">
+                <div class="for_underline">
+                    <p>欢迎回到猿计划</p>
+                </div>
+                <div class="for_input">
+                    <input id="mobile" placeholder="请输入手机号" />
+                </div>
+                <div class="for_input">
+                    <input id="pwd" type="password" placeholder="6-16位密码，区分大小写，不能使用空格" />
+                </div>
+                <div class="for_other">
+                    <input id="remember" type="checkbox" /><span>下次自动登录</span>
+                    <a class="password" href="passwordforget.html">忘记密码</a>
+                    <a class="register" href="register.html">立即注册</a>
+                </div>
+                <div class="for_button">
+                    <input id="sub" type="button" value="登录" />
+                </div>
+            </form>
+        </div>
+        <div class="tips">
+            <div class="tips_red">×</div><div class="error"></div>
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="../js/login.js"></script>
+</body>
+</html>
