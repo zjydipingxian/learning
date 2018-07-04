@@ -366,10 +366,17 @@
 }
 #limit .limitBox .right{
 	width: 252px;
+	    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 #limit .limitBox .title{
 	font-size: 16px;
 	line-height: 26px;
+	white-space: nowrap;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 #limit .limitBox p{
 	line-height: 24px;
@@ -508,6 +515,7 @@
 	left: 0;
 }
 #say .content li{
+	position: relative;
 	width: 353px;
 	padding: 1px;
 	background: #fff;
@@ -526,19 +534,46 @@
 }
 #say .content li div{
 	width: 345px;
-	height: 180px;
+	/* height: 180px; */
 	position: relative;
 	top: -40px;
 	left: 4px;
 	background: #fff;
-	padding: 20px;
+	padding: 20px 15px;
 	box-sizing: border-box;
+	overflow: hidden;
 }
+#say .content li div.action {
+
+}
+#say .content li p{
+	line-height: 20px;
+}
+#say .content li span.jiantou1{
+    position: absolute;
+    height: 16px;
+    width: 14px;
+    right: 20px;
+    bottom: 30px;
+    background: url('../images/jiantou.png') center center no-repeat #fff;
+    z-index: 2;}
 #say .content li p:nth-child(1){
 	color: #999;
 }
 #say .content li p:nth-child(2){
 	margin: 10px 0 15px 0;
+}
+#say .content li p:nth-child(3){
+	text-align: left;
+    font-size: 13px;
+    min-height: 80px;
+    max-height: 80px;
+    transition: max-height .4s ease-in-out;
+    overflow: hidden;
+}
+#say .content li p:nth-child(3).action {
+	max-height: 0px;
+	overflow: none; 
 }
 #say .content li p .left{
 	font-size: 16px;

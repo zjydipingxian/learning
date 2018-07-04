@@ -181,6 +181,7 @@ window.yx = {
 
                 //删除商品功能
                 var colseBtns = yx.ga('.cart .list .close');
+                console.log(colseBtns)
                 for (var i = 0; i < colseBtns.length; i++) {
                     colseBtns[i].onclick = function() {
                         localStorage.removeItem(this.parentNode.getAttribute('data-id'));

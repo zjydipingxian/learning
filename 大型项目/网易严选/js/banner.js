@@ -1,7 +1,7 @@
 /*
- * 组件api说明
- * 	1、依赖move.js，组件前一定要引入move.js
- * 	2、轮播图需要有一个父级，这个父级一定要给一个id
+ * 
+ * 	依赖move.js，组件前一定要引入move.js
+ * 	轮播图需要有一个父级，这个父级一定要给一个id
  */
 
 (function(window, undefined) {
