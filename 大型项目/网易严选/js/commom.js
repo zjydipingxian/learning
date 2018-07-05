@@ -63,19 +63,19 @@ window.yx = {
                 subNav = yx.g('.subNav'),
                 uls = yx.ga('.subNav ul'),
                 newLis = []; //存储实际有用到的导航li
-            // console.log(navList.cateList.length)
+
+
+
 
 
             //首页没有hover和后三个没有
             for (var i = 1; i < lis.length - 3; i++) {
                 newLis.push(lis[i])
             }
-
-            // console.log(navList.cateList[this.index].subCateList);
-
+            console.log(navList.cateList)
             // 导航hover
+            
             for (var i = 0; i < newLis.length; i++) {
-
                 newLis[i].index = uls[i].index = i;
                 newLis[i].setAttribute('data-index', newLis[i].index);
 

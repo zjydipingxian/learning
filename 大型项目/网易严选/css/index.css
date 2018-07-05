@@ -542,10 +542,9 @@
 	padding: 20px 15px;
 	box-sizing: border-box;
 	overflow: hidden;
+	transition: 0.3s;
 }
-#say .content li div.action {
 
-}
 #say .content li p{
 	line-height: 20px;
 }
@@ -564,16 +563,18 @@
 	margin: 10px 0 15px 0;
 }
 #say .content li p:nth-child(3){
+	transition: .3s;
 	text-align: left;
     font-size: 13px;
     min-height: 80px;
     max-height: 80px;
     transition: max-height .4s ease-in-out;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 #say .content li p:nth-child(3).action {
-	max-height: 0px;
-	overflow: none; 
+	max-height: 166px;
+	transition: .4s
+	/* overflow: none;  */
 }
 #say .content li p .left{
 	font-size: 16px;
@@ -588,4 +589,9 @@
 }
 #say .next{
 	right: -60px;
+}
+
+#say .content li div.action {
+	transition: 0.3s;
+	top :  -150px;
 }

@@ -16,41 +16,75 @@ bannerPic.init({
     moveNum: 1, //单次运动的图片数量（图片总量必须为运动数量的整倍数）
     circle: true, //小圆点功能，true为显示，false为不显示，默认显示
     moveWay: 'opacity' //运动方式，opacity为透明度过渡，position为位置过渡
-})
-
-// 新品首发
-var newProduct = new banner();
-newProduct.init({
-    id: 'newProduct', //轮播图父级的id，必需传的参数
-    autoplay: false, //自动播放，true为自动，false为不自动，默认为true
-    intervalTime: 3000, //间隔时间，运动后停顿的时间，默认1s
-    loop: false, //循环播放，true为循环，false为不循环，默认为true
-    totalNum: 8, //图片总量
-    moveNum: 4, //单次运动的图片数量（图片总量必须为运动数量的整倍数）
-    circle: true, //小圆点功能，true为显示，false为不显示，默认显示
-    moveWay: 'position' //运动方式，opacity为透明度过渡，position为位置过渡
-})
-
-
-
-
-
-newProduct.on('rightEnd', function() {
-    //alert('右边到头了');
-    this.nextBtn.style.background = '#E7E2D7';
 });
-newProduct.on('leftEnd', function() {
-    //alert('左边到头了');
-    this.prevBtn.style.background = '#E7E2D7';
-});
-newProduct.on('leftClick', function() {
-    //alert('左边点击了');
-    this.nextBtn.style.background = '#D0C4AF';
-});
-newProduct.on('rightClick', function() {
-    //alert('右边点击了');
-    this.prevBtn.style.background = '#D0C4AF';
-});
+
+
+
+
+(function() {
+    // console.log(newList.newItemList)
+
+    var item = newList.newItemList;
+    var str = ''
+    // console.log(item[0].name)
+    for (var i = 0; i < item.length; i++) {
+
+        var spanStr = '';
+
+        if (item[i].productPlace) {
+            spanStr += '<span class="colorNum">'+item[i].productPlace+'</span>';
+        } else {
+            spanStr = '';
+        }
+
+        str += '<li>'+
+                    spanStr+
+                    '<a href="#">'+
+                    '<img class="original" src="images/empty.gif" data-original="'+item[i].primaryPicUrl+'"/>'+
+                    '<img class="original" src="images/empty.gif" data-original="'+item[i].scenePicUrl+'"/>'+
+                '</a>'+
+                    '<div class="title">'+
+                        '<a href="#">'+item[i].name+'</a>'+
+                        '<p>¥'+item[i].retailPrice+'</p>'+
+                    '</div>'+
+                '</li>'; 
+    }
+    yx.g('#newProduct .carouselImgCon ul').innerHTML = str;
+    // console.log(yx.ga('#newProduct .carouselImgCon ul'))
+    var newProduct = new banner();
+    newProduct.init({
+        id: 'newProduct', //轮播图父级的id，必需传的参数
+        autoplay: false, //自动播放，true为自动，false为不自动，默认为true
+        intervalTime: 3000, //间隔时间，运动后停顿的时间，默认1s
+        loop: false, //循环播放，true为循环，false为不循环，默认为true
+        totalNum: item.length, //图片总量
+        moveNum: 4, //单次运动的图片数量（图片总量必须为运动数量的整倍数）
+        circle: true, //小圆点功能，true为显示，false为不显示，默认显示
+        moveWay: 'position' //运动方式，opacity为透明度过渡，position为位置过渡
+    })
+    newProduct.on('rightEnd', function() {
+        //alert('右边到头了');
+        this.nextBtn.style.background = '#E7E2D7';
+    });
+    newProduct.on('leftEnd', function() {
+        //alert('左边到头了');
+        this.prevBtn.style.background = '#E7E2D7';
+    });
+    newProduct.on('leftClick', function() {
+        //alert('左边点击了');
+        this.nextBtn.style.background = '#D0C4AF';
+    });
+    newProduct.on('rightClick', function() {
+        //alert('右边点击了');
+        this.prevBtn.style.background = '#D0C4AF';
+    });
+
+})();
+
+
+
+
+
 
 
 //人气推荐
@@ -158,43 +192,41 @@ newProduct.on('rightClick', function() {
 
 // 大家都在说
 
-(function () {
-	var oUl = yx.g('#sayPic ul'),
-		commentList = comment.commentList,
-		str = '';
-	
-	
-	for (var i = 0; i < commentList.length; i++) {
-		var content = '';
-		var jiantou = '';
-		if (commentList[i].content.length > 85) {
-			var newStr = commentList[i].content.substring(0,85);
-			jiantou += '<span class = "jiantou1"></span>'
-			content = newStr;
-		} else {
-			content = commentList[i].content;
-		}
-		str += '<li>'+
-                    '<a class="scaleImg" href="#"><img class="original" src="images/empty.gif" data-original="'+commentList[i].listPicUrl+'"/></a>'+
-                    '<div>'+
-                        '<p>'+commentList[i].frontUserName+' &nbsp;'+yx.formatDate(commentList[i].createTime)+'</p>'+
-                        '<p class="clearfix">'+
-                            '<span class="left">'+commentList[i].name+'</span>'+
-                            '<span class="right" >¥'+commentList[i].retailPrice+'</span>'+
-                        '</p>'+
-                        '<p data-content = '+commentList[i].content+' class="p1">'+content+'</p>'+                       
-                    '</div>'+
-                     jiantou +
-                '</li>'
 
-	}
-	oUl.innerHTML = str;
 
-	
+(function() {
+    var oUl = yx.g('#sayPic ul'),
+        commentList = comment.commentList,
+        str = '';
+    for (var i = 0; i < commentList.length; i++) {
+        var content = '';
+        var jiantou = '';
+        if (commentList[i].content.length > 85) {
+            var newStr = commentList[i].content.substring(0, 85);
+            jiantou += '<span class = "jiantou1"></span>'
+            content = newStr;
+        } else {
+            content = commentList[i].content;
+        }
+        str += '<li>' +
+            '<a class="scaleImg" href="#"><img class="original" src="images/empty.gif" data-original="' + commentList[i].listPicUrl + '"/></a>' +
+            '<div>' +
+            '<p>' + commentList[i].frontUserName + ' &nbsp;' + yx.formatDate(commentList[i].createTime) + '</p>' +
+            '<p class="clearfix">' +
+            '<span class="left">' + commentList[i].name + '</span>' +
+            '<span class="right" >¥' + commentList[i].retailPrice + '</span>' +
+            '</p>' +
+            '<p data-content = ' + commentList[i].content + ' class="p1">' + content + '</p>' +
+            '</div>' +
+            jiantou +
+            '</li>'
 
-	
+    }
+    oUl.innerHTML = str;
 
-	
+
+
+
     var sayPic = new banner();
     sayPic.init({
         id: 'sayPic', //轮播图父级的id，必需传的参数
@@ -207,7 +239,3 @@ newProduct.on('rightClick', function() {
         moveWay: 'position' //运动方式，opacity为透明度过渡，position为位置过渡
     })
 })();
-	
-
-	
-
